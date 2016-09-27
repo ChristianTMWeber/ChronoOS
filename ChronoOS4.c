@@ -109,9 +109,7 @@ PORT G INPUT/OUTPUT BITS
 //
 //
 #use delay(clock = 20000000)
-#define RED1_LED PIN_C2
-#define RED2_LED PIN_B2
-#define RED3_LED PIN_D2
+
 
 //
 // setup variables
@@ -224,22 +222,6 @@ run_mode = 0;                             // Clear the run mode flag
    delay_ms(500);
 
 //
-// Setup the Serial Display
-//
-
-//
-// Backlight On
-//
-      putc(0X0E);
-      delay_us(50);
-//
-// Clear the display
-//
-      putc(0x0C);
-      delay_us(50);
-      
-      printf("  Chronopixel 4  ");     // Start of the initialization routine
-//
       clear_chrono();                     // Clear the Chronopixel
 
 
@@ -248,12 +230,6 @@ run_mode = 0;                             // Clear the run mode flag
    output_c(portc_image);
    output_b(portb_image); 
    
-//
-// Clear the display
-//
-      putc(0x0C);
-      delay_us(50);      
-      printf("  Chronopixel 4  ");     // Start of the initialization routine
 //
 //
 //
@@ -264,11 +240,6 @@ run_mode = 0;                             // Clear the run mode flag
             sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
             if(sw_input !=0)
             {
-            putc(0x10);
-            delay_us(50);
-            putc(0x70);
-            delay_us(100);
-            printf("Adj ");
             }
             while(sw_input != 0)                            // Input is high
             {
@@ -557,8 +528,8 @@ hit_imlar_zero_high();                  // Release from 0 mVolts
       total_chrono_count = column_count6;
       four_digit_display();
 
-      putc(0x0d);                              // CR and
-      putc(0x0a);                              // LF between pixels
+      putc(0x0d);                              // CR (carriage return) and
+      putc(0x0a);                              // LF (linefeed) between pixels
 ////End Chris changes
 
 //

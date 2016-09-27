@@ -11,5 +11,5 @@
 
 
 #use delay(clock=20000000)//#use delay(clock=32000000)
-#use rs232(baud=9600,parity=N,xmit=PIN_G1,rcv=PIN_G2,bits=8)
+#use rs232(baud=115200,parity=N,xmit=PIN_G1,rcv=PIN_G2,bits=8)
 
