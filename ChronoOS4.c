@@ -1,103 +1,103 @@
 /*
-*  Latest Changes Jun 15, 2016    changed the way counts are displayed, should now work better with the serial output
-*  Latest Chenges May 12,2016             Do not increment the time stamp
-*  Latest changes April 25, 2016
-*  Latest changes March 30, 2016
-*  Latest changes January 11, 2016
-*
-*  Title:         Chronopixel4
-*  Date:          December 28, 2015
-*  Author:        Thomas Barker
-*  Description:   Chronopixel4 interacts with the Chronopixel chip 
-*                 to read the time stamp if an event occured.
-*                 
-*                 
-*
-*        
-*
-*                 Use PIC16F1527
-
-PORT A OUTPUT BITS
-
-0  CKCAL  
-1  CKA  
-2  CKB  
-3  CKC  
-4  TNIN  
-5  TIN  
-6  OSC  
-7  OSC  
-
-PORT B OUTPUT BITS
-
-0  TSCNT<8>  
-1  TSCNT<9>  
-2  TSCNT<10>  
-3  TSCNT<11>  
-4    
-5    
-6  ICSPCLK (used for programming) 
-7  ICSPDAT (used for programming) 
-
-PORT C OUTPUT BITS
-
-0  TSCNT<0> 
-1  TSCNT<1>  
-2  TSCNT<2>  
-3  TSCNT<3> 
-4  TSCNT<4>
-5  TSCNT<5>  
-6  TSCNT<6>  
-7  TSCNT<7>  
-
-PORT D OUTPUT BITS
-
-0  RADR<0>
-1  RADR<1>
-2  RADR<2>
-3  RADR<3>
-4  RADR<4>
-5  RADR<5>
-6
-7
-
-PORT E OUTPUT BITS
-
-0  ColADR<0>
-1  ColADR<1>
-2  ColADR<2>
-3  ColADR<3>
-4  ColADR<4>
-5  ColADR<5>
-6
-7
-
-PORT F INPUT/OUTPUT BITS
-
-0  SET  
-1  Rem_Sel  
-2  RAdrValid  
-3  RdTslh
-4  RdClk
-5  RdParLD
-6  RdOut
-7  PDRST
-
-PORT G INPUT/OUTPUT BITS
-
-0  SWITCH 1
-1  TX2
-2  RC2
-3  SWITCH 2
-4  SWITCH 3
-5  Vpp/MCLR
-
-
-  
-
-
-
-*/
+ *  Latest Changes Jun 15, 2016    changed the way counts are displayed, should now work better with the serial output
+ *  Latest Chenges May 12,2016             Do not increment the time stamp
+ *  Latest changes April 25, 2016
+ *  Latest changes March 30, 2016
+ *  Latest changes January 11, 2016
+ *
+ *  Title:         Chronopixel4
+ *  Date:          December 28, 2015
+ *  Author:        Thomas Barker
+ *  Description:   Chronopixel4 interacts with the Chronopixel chip
+ *                 to read the time stamp if an event occured.
+ *
+ *
+ *
+ *
+ *
+ *                 Use PIC16F1527
+ *
+ * PORT A OUTPUT BITS
+ *
+ * 0  CKCAL
+ * 1  CKA
+ * 2  CKB
+ * 3  CKC
+ * 4  TNIN
+ * 5  TIN
+ * 6  OSC
+ * 7  OSC
+ *
+ * PORT B OUTPUT BITS
+ *
+ * 0  TSCNT<8>
+ * 1  TSCNT<9>
+ * 2  TSCNT<10>
+ * 3  TSCNT<11>
+ * 4
+ * 5
+ * 6  ICSPCLK (used for programming)
+ * 7  ICSPDAT (used for programming)
+ *
+ * PORT C OUTPUT BITS
+ *
+ * 0  TSCNT<0>
+ * 1  TSCNT<1>
+ * 2  TSCNT<2>
+ * 3  TSCNT<3>
+ * 4  TSCNT<4>
+ * 5  TSCNT<5>
+ * 6  TSCNT<6>
+ * 7  TSCNT<7>
+ *
+ * PORT D OUTPUT BITS
+ *
+ * 0  RADR<0>
+ * 1  RADR<1>
+ * 2  RADR<2>
+ * 3  RADR<3>
+ * 4  RADR<4>
+ * 5  RADR<5>
+ * 6
+ * 7
+ *
+ * PORT E OUTPUT BITS
+ *
+ * 0  ColADR<0>
+ * 1  ColADR<1>
+ * 2  ColADR<2>
+ * 3  ColADR<3>
+ * 4  ColADR<4>
+ * 5  ColADR<5>
+ * 6
+ * 7
+ *
+ * PORT F INPUT/OUTPUT BITS
+ *
+ * 0  SET
+ * 1  Rem_Sel
+ * 2  RAdrValid
+ * 3  RdTslh
+ * 4  RdClk
+ * 5  RdParLD
+ * 6  RdOut
+ * 7  PDRST
+ *
+ * PORT G INPUT/OUTPUT BITS
+ *
+ * 0  SWITCH 1
+ * 1  TX2
+ * 2  RC2
+ * 3  SWITCH 2
+ * 4  SWITCH 3
+ * 5  Vpp/MCLR
+ *
+ *
+ *
+ *
+ *
+ *
+ */
 #include "C:\Dropbox\ChronoPixel\ChronoOS\ChronoOSHeader.h"
 //
 // IIC setup
@@ -206,349 +206,289 @@ long chrono_data_storage_pointer;
 
 void main()
 {
-clear_chrono();
-run_mode = 0;                             // Clear the run mode flag
-
-  set_tris_a(0b00000000);
-  set_tris_b(0b00000000);
-  set_tris_c(0b00000000);
-  set_tris_d(0b00000000);
-  set_tris_e(0b00000000);
-  set_tris_f(0b00000100);
-  set_tris_g(0b10111100);
+    clear_chrono();
+    run_mode = 0;                             // Clear the run mode flag
+    
+    set_tris_a(0b00000000);
+    set_tris_b(0b00000000);
+    set_tris_c(0b00000000);
+    set_tris_d(0b00000000);
+    set_tris_e(0b00000000);
+    set_tris_f(0b00000100);
+    set_tris_g(0b10111100);
 //
 //
 //
-   delay_ms(500);
-
+    delay_ms(500);
+    
+// Clear the Chronopixel by setting ports c though e to zero (but we still need to output, right?)
+    clear_chrono();                     // Clear the Chronopixel
+    
+// set and output port c and d to 0
+// these two ports seem related to setting the timestamps on the chronopixel
+    portc_image = (0b00000000);            // Set a Stamp Counter
+    portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
+    output_c(portc_image);
+    output_b(portb_image);
+    
 //
-      clear_chrono();                     // Clear the Chronopixel
-
-
-   portc_image = (0b00000000);            // Set a Stamp Counter
-   portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
-   output_c(portc_image);
-   output_b(portb_image); 
-   
 //
 //
 //
-//
-   while(TRUE)                          // Do stuff
-   {
-            portg_image = input_g();                        // Get inputs from PortG
-            sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-            if(sw_input !=0)
-            {
-            }
-            while(sw_input != 0)                            // Input is high
-            {
+    while(TRUE)                          // Do stuff // The long while loop in which everything happens
+    {
+        portg_image = input_g();                        // Get inputs from PortG
+        sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
+        if(sw_input !=0)
+        {
+        }
+        while(sw_input != 0)                            // Input is high
+        {
             portg_image = input_g();                        // Get inputs from PortG
             sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
             hit_imlar_zero_low();                           // Release from 0 mVolts
             hit_imlar_high();                               // Pull VTH to adjust threshold mV
-            }
-
-   portc_image = (0b00000000);            // Set a Stamp Counter
-   portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
-   output_c(portc_image);
-   output_b(portb_image);
-   clear_chrono();
-
-      idle4_counter = 0;
-      while(idle4_counter <10)
-      {
-      waveform_idle4();
-      idle4_counter++;
-      }
-
+        }
+        
+        portc_image = (0b00000000);            // Set timestamp to 0
+        portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
+        output_c(portc_image);				   // output to port c
+        output_b(portb_image);				   // output to port b
+        clear_chrono();
+        
+        idle4_counter = 0;
+        while(idle4_counter <5)
+        {
+            waveform_idle4();
+            idle4_counter++;
+        }
+        
 //   hit_imlar_zero_low();                  // Release from 0 mVolts
 //   hit_imlar_high();                      // Pull VTH to 30 mV
 //    changed on 8/31/2016
-hit_imlar_zero_high();                  // Release from 0 mVolts
-   hit_imlar_low();                      // Pull VTH to 30 mV
-
-   waveform_calin4();
-
-   calib4_counter = 0;
-   while(calib4_counter <100)
-   {
-   waveform_calib4();
-   calib4_counter++;
-   }
-
-      hit_imlar_zero_low();                  // Release VTH short
-      hit_imlar_low();                       // VTH to 250 mV
-      mrst4_counter = 0;
-      while(mrst4_counter <5)
-      {   
-      waveform_mrst4();
-      mrst4_counter++;
-      }
-      hit_imlar_high();                      // Pull VTH to 30 mV
-      hit_imlar_zero_high();                 // Pull VTH to 0mV
-
-//
-// Wait for Chronopixel hits 
+        hit_imlar_zero_high();                  // Release from 0 mVolts
+        hit_imlar_low();                      // Pull VTH to 30 mV
+        
+        waveform_calin4();
+        
+        // calibrate repeatedly
+        calib4_counter = 0;
+        while(calib4_counter <100)
+        {
+            waveform_calib4();
+            calib4_counter++;
+        }
+        
+        hit_imlar_zero_low();                  // Release VTH short
+        hit_imlar_low();                       // VTH to 250 mV
+        // reset the memory by writing the output c (and maybe b too) to the chronopixel
+        mrst4_counter = 0;
+        while(mrst4_counter <5)
+        {
+            waveform_mrst4();
+            mrst4_counter++;
+        }
+        hit_imlar_high();                      // Pull VTH to 30 mV
+        hit_imlar_zero_high();                 // Pull VTH to 0mV
+        
 //
 ///*
-   portc_image = (0b00000001);            // Set a Stamp Counter
-   portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
-   output_c(portc_image);
-   output_b(portb_image);
+        // set the timestamp to 1 and send it to the chronopixel
+        portc_image = (0b00000001);            // Set a Stamp Counter
+        portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
+        output_c(portc_image);
+        output_b(portb_image);
 ///*
-      wrtsig_counter = 0;
-      while(wrtsig_counter < 4095)        //Time Stamp 4095
-      {   
-      waveform_wrtsig();
-      wrtsig_counter++;
-
-         if(portc_image <255)
-         {
-         portc_image ++;                  // Increment Time Stamp Counter
-         }
+        wrtsig_counter = 0;
+        while(wrtsig_counter < 4095)        //Time Stamp 4095
+        {
+            waveform_wrtsig(); // record particle incidents on the chronopixel
+            wrtsig_counter++;
+/*
+            //increment the timestamp to write to the chronopixel
+            if(portc_image <255) //port c seems to be responsible for the 8 least significant bits
+            { portc_image ++;}               // Increment Time Stamp Counter
             else
-            {
-            portc_image = 0;
-            portb_image ++;
+            {   portc_image = 0;
+                portb_image ++; // and port b for the remaining 4 (most) significant bits
             }
-//      output_c(portc_image);            // For this version do not increment time stamp
-//      output_b(portb_image);
-      }
-         portc_image = 0;                 // Clear time stamp
-         portb_image = 0;
-         output_c(portc_image);
-         output_b(portb_image);
-   
-
+	        output_c(portc_image); //output the incremented timestamp to the chronopixel
+	     	output_b(portb_image);
+*/
+        }
+        portc_image = 0;                 // Clear time stamp
+        portb_image = 0;
+        output_c(portc_image);
+        output_b(portb_image);
+        
+        
 //
 // Write to memory
 //
-   portd_image = 0;
-   porte_image = 0;
-   rem_sel_low();
-      column_count1 = 0;
-      column_count2 = 0;
-      column_count3 = 0;
-      column_count4 = 0;
-      column_count5 = 0;
-      column_count6 = 0;
-      wrtsig_counter = 0;
-      while(wrtsig_counter <384)         // First eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count1++;
-      }
-       wrtsig_counter++;
-
-      }
+        portd_image = 0;
+        porte_image = 0;
+        rem_sel_low();
+        column_count1 = 0;
+        column_count2 = 0;
+        column_count3 = 0;
+        column_count4 = 0;
+        column_count5 = 0;
+        column_count6 = 0;
+        wrtsig_counter = 0;
+        while(wrtsig_counter <384)         // First eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count1++;
+            }
+            wrtsig_counter++;
+            
+        }
 //
 //
 //
-      while(wrtsig_counter <768)         // Second eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count2++; 
-      }
-       wrtsig_counter++;
-
-      }
+        while(wrtsig_counter <768)         // Second eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count2++;
+            }
+            wrtsig_counter++;
+            
+        }
 //
 //
 //
-      while(wrtsig_counter <1152)         // Third eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count3++; 
-      }
-       wrtsig_counter++;
-
-      }
+        while(wrtsig_counter <1152)         // Third eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count3++;
+            }
+            wrtsig_counter++;
+            
+        }
 //
 //
 //
-      while(wrtsig_counter <1536)         // Forth eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count4++; 
-      }
-       wrtsig_counter++;
-
-      }
-
+        while(wrtsig_counter <1536)         // Forth eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count4++;
+            }
+            wrtsig_counter++;
+            
+        }
+        
 //
 //
 //
-      while(wrtsig_counter <1920)         // Fifth eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count5++; 
-      }
-       wrtsig_counter++;
-
-      }
+        while(wrtsig_counter <1920)         // Fifth eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count5++;
+            }
+            wrtsig_counter++;
+            
+        }
 //
 //
 //
-      while(wrtsig_counter <2304)         // Sixth(last) eight columns. Number of total pixels is 2304
-      {   
-   waveform_drdtst();                     // Read the pixel
-   read_chrono();                         // Increment the rows and columns
-   
-      if(chrono_data != 0)
-      {
-      column_count6++; 
-      }
-       wrtsig_counter++;
-
-      }
-
-
-
-
-/*   Tom's original code
-//
+        while(wrtsig_counter <2304)         // Sixth(last) eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            read_chrono();                         // Increment the rows and columns
+            
+            if(chrono_data != 0)
+            {
+                column_count6++;
+            }
+            wrtsig_counter++;
+            
+        }
+        
 // Display the first group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x6A);
-      delay_us(50);
-      total_chrono_count = column_count1;
-      four_digit_display();
+        
+        
+        delay_us(50);
+        total_chrono_count = column_count1;
+        four_digit_display();
 //
 // Display the second group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x70);
-      delay_us(50);
-      total_chrono_count = column_count2;
-      four_digit_display();
+        putc(0x2C); //comma
+        delay_us(50);
+        total_chrono_count = column_count2;
+        four_digit_display();
 //
 // Display the third group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x75);
-      delay_us(50);
-      total_chrono_count = column_count3;
-      four_digit_display();
+        putc(0x2C); //comma
+        delay_us(50);
+        total_chrono_count = column_count3;
+        four_digit_display();
 //
 // Display the fourth group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x7E);
-      delay_us(50);
-      total_chrono_count = column_count4;
-      four_digit_display();
-
+        putc(0x2C); //comma
+        delay_us(50);
+        total_chrono_count = column_count4;
+        four_digit_display();
+        
 //
 // Display the fifth group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x84);
-      delay_us(50);
-      total_chrono_count = column_count5;
-      four_digit_display();
+        putc(0x2C); //comma
+        delay_us(50);
+        total_chrono_count = column_count5;
+        four_digit_display();
 //
 // Display the sixth group of columns
 //
-      putc(0x10);
-      delay_us(50);
-      putc(0x89);
-      delay_us(50);
-      total_chrono_count = column_count6;
-      four_digit_display();
-      */
-//Chris changes
-// Display the first group of columns
-//
-
-
-      delay_us(50);
-      total_chrono_count = column_count1;
-      four_digit_display();
-//
-// Display the second group of columns
-//
-      putc(0x2C); //comma
-      delay_us(50);
-      total_chrono_count = column_count2;
-      four_digit_display();
-//
-// Display the third group of columns
-//
-      putc(0x2C); //comma
-      delay_us(50);
-      total_chrono_count = column_count3;
-      four_digit_display();
-//
-// Display the fourth group of columns
-//
-      putc(0x2C); //comma
-      delay_us(50);
-      total_chrono_count = column_count4;
-      four_digit_display();
-
-//
-// Display the fifth group of columns
-//
-      putc(0x2C); //comma
-      delay_us(50);
-      total_chrono_count = column_count5;
-      four_digit_display();
-//
-// Display the sixth group of columns
-//
-      putc(0x2C); //comma
-      delay_us(50);
-      total_chrono_count = column_count6;
-      four_digit_display();
-
-      putc(0x0d);                              // CR (carriage return) and
-      putc(0x0a);                              // LF (linefeed) between pixels
+        putc(0x2C); //comma
+        delay_us(50);
+        total_chrono_count = column_count6;
+        four_digit_display();
+        
+        putc(0x0d);                              // CR (carriage return) and
+        putc(0x0a);                              // LF (linefeed) between pixels
 ////End Chris changes
-
+        
 //
 // Clear the storage
 //
-   chrono_data_storage_pointer = 0;
-   while (chrono_data_storage_pointer < 600)
-   {
-   chrono_data_storage[chrono_data_storage_pointer] = 0;
-   chrono_data_storage_pointer++;
-   }
-
-
-
-/*
+        chrono_data_storage_pointer = 0;
+        while (chrono_data_storage_pointer < 600)
+        {
+            chrono_data_storage[chrono_data_storage_pointer] = 0;
+            chrono_data_storage_pointer++;
+        }
+        
+        
+        
+        /*
    chrono_data_storage_pointer = 0;
    while (chrono_data_storage_pointer < 500)
    {
-
+ 
 // Display the array
       putc(0x10);
       delay_us(50);
@@ -556,68 +496,68 @@ hit_imlar_zero_high();                  // Release from 0 mVolts
       delay_us(50);
       total_chrono_count = chrono_data_storage_pointer;
       four_digit_display();
-
+ 
 // Display the pixel readout
       putc(0x10);
       delay_us(50);
       putc(0x75);
       delay_us(50);
-      total_chrono_count = chrono_data_storage[chrono_data_storage_pointer];      
+      total_chrono_count = chrono_data_storage[chrono_data_storage_pointer];
      four_digit_display();
       delay_ms(100);                      // I need time to read the data
       chrono_data_storage_pointer ++;
-
+ 
    }
-*/
-   }     // End of while(TRUE)
+         */
+    }     // End of while(TRUE)
 //
 //
 //*/
 //
 // Test the drdtst routine                //Read the counter
 //
-   rem_sel_low();
+    rem_sel_low();
 //   rem_sel_high();
 //   while(TRUE)
 //   {
-   porte_image = 0;                       //reset counter
+    porte_image = 0;                       //reset counter
 //   while(porte_image <46)
 //   {
-   waveform_drdtst();
-   portd_image = 0;
-   read_chrono();
-
+    waveform_drdtst();
+    portd_image = 0;
+    read_chrono();
+    
 // Display the Row
-      putc(0x10);
-      delay_us(50);
-      putc(0x6b);
-      delay_us(50);
-      total_chrono_count = (portd_image);
-      four_digit_display();
-
+    putc(0x10);
+    delay_us(50);
+    putc(0x6b);
+    delay_us(50);
+    total_chrono_count = (portd_image);
+    four_digit_display();
+    
 // Display the column
-      putc(0x10);
-      delay_us(50);
-      putc(0x70);
-      delay_us(50);
-      total_chrono_count = (porte_image);
-      four_digit_display();
-
+    putc(0x10);
+    delay_us(50);
+    putc(0x70);
+    delay_us(50);
+    total_chrono_count = (porte_image);
+    four_digit_display();
+    
 // Display the pixel readout
-      putc(0x10);
-      delay_us(50);
-      putc(0x75);
-      delay_us(50);
-      total_chrono_count = chrono_data_storage[1];
-//      total_chrono_count = chrono_data; 
-      four_digit_display();
-      delay_ms(100);                      // I need time to read the data
-
+    putc(0x10);
+    delay_us(50);
+    putc(0x75);
+    delay_us(50);
+    total_chrono_count = chrono_data_storage[1];
+//      total_chrono_count = chrono_data;
+    four_digit_display();
+    delay_ms(100);                      // I need time to read the data
+    
 //   }
 //}
-
-
-
+    
+    
+    
 //
 // Test the wrtt4 routine
 //
@@ -625,94 +565,94 @@ hit_imlar_zero_high();                  // Release from 0 mVolts
 //      {
 //      waveform_wrtt4();
 //      }
-
-
+    
+    
 // Test the calin4 routine
 //
 //      while(TRUE)
 //      {
 //      waveform_calin4();
 //      }
-
+    
 //
 // Test the beam2 routine
 //
-
-      while(TRUE)
-      {
-      waveform_beam2();
-      }
-      while (TRUE)
-      {
+    
+    while(TRUE)
+    {
+        waveform_beam2();
+    }
+    while (TRUE)
+    {
 //
 // Set cursor position (third line, fourth character)
 //
-            portg_image = input_g();                        // Get inputs from PortG
-            sw_input = portg_image & (0b00001000);          // Sw2 from Pin G3, this is the STOP
-            if(sw_input ==0)
-            {
+        portg_image = input_g();                        // Get inputs from PortG
+        sw_input = portg_image & (0b00001000);          // Sw2 from Pin G3, this is the STOP
+        if(sw_input ==0)
+        {
             run_mode = 0;
             pdrst_flag = 0;
-      putc(0x10);
-      delay_us(50);
-      putc(0x70);
-      delay_us(100);
-      printf("Stop");
-
-            }
-
-   if(run_mode ==0)
-   {
-      putc(0x10);
-      delay_us(50);
-      putc(0x6B);
-      delay_us(100);
-      printf("Idle");
-   }
-//      
+            putc(0x10);
+            delay_us(50);
+            putc(0x70);
+            delay_us(100);
+            printf("Stop");
+            
+        }
+        
+        if(run_mode ==0)
+        {
+            putc(0x10);
+            delay_us(50);
+            putc(0x6B);
+            delay_us(100);
+            printf("Idle");
+        }
+//
 // Set cursor position (third line, fourth character)
 //
-            portg_image = input_g();                        // Get inputs from PortG
-            sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-            while((sw_input != 0)&& (run_mode == 0))
-            {
+        portg_image = input_g();                        // Get inputs from PortG
+        sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
+        while((sw_input != 0)&& (run_mode == 0))
+        {
             waveform_idle4();
             portg_image = input_g();                        // Get inputs from PortG
             sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-
-            }
-            portg_image = input_g();                        // Get inputs from PortG
-            sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4            
-            if(sw_input == 0)                // Check Switch One
-            {
-      putc(0x10);
-      delay_us(50);
-      putc(0x6B);
-      delay_us(100);
-      printf("Run ");
-
-      putc(0x10);
-      delay_us(50);
-      putc(0x70);
-      delay_us(100);
-      printf("    ");                                 // Remove Stop
-
-      run_mode = 1;                                   // Set Run Mode Flag
-      
-            }
-
+            
+        }
+        portg_image = input_g();                        // Get inputs from PortG
+        sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
+        if(sw_input == 0)                // Check Switch One
+        {
+            putc(0x10);
+            delay_us(50);
+            putc(0x6B);
+            delay_us(100);
+            printf("Run ");
+            
+            putc(0x10);
+            delay_us(50);
+            putc(0x70);
+            delay_us(100);
+            printf("    ");                                 // Remove Stop
+            
+            run_mode = 1;                                   // Set Run Mode Flag
+            
+        }
+        
 //
 // Display Row and Columns
 //
-
-//      read_chrono();      
+        
+//      read_chrono();
 //      total_chrono_count = (portd_image );                  // Value to be displayed
 //      four_digit_display();                                 // Display Row
 //
 //
 // Set cursor position (third line, ninth character)
 //
-
+        
 //      putc(0x10);
 //      delay_us(50);
 //      putc(0x75);
@@ -720,66 +660,66 @@ hit_imlar_zero_high();                  // Release from 0 mVolts
 //
 // Display Row and Columns
 //
-
+        
 //      total_chrono_count = (porte_image );                  // Value to be displayed
 //      four_digit_display();                                 // Display Column
-
-
+        
+        
 //
 // Start control signals
 //
-
-         tnin_high();
-         delay_us(50);
-         tnin_low();
-         delay_us(10);
-         tin_high();
-         delay_us(50);
-         tin_low();
-         delay_us(10);
-         tnin_high();
-         delay_us(50);
-         tnin_low();
-         cka_high();
-         delay_us(50);
-         cka_low();
-         ckb_high();
-         delay_us(50);
-         ckb_low();
-         ckc_high();
-         delay_us(50);
-         ckc_low();
-         ckcal_high();
-         delay_us(50);
-         ckcal_low();
-
-         set_high();
-         delay_us(50);
-         set_low();
-         rem_sel_high();
-         delay_us(50);
-         rem_sel_low();
-         radrvalid_high();
-         delay_us(50);
-         radrvalid_low();
-         rdtsth_high();
-         delay_us(50);
-         rdtsth_low();
-         rdclk_high();
-         delay_us(50);
-         rdclk_low();
-         rdparld_high();
-         delay_us(50);
-         rdparld_low();
-         
-
-         
-         
-      }  // End of WHILE
-//      
+        
+        tnin_high();
+        delay_us(50);
+        tnin_low();
+        delay_us(10);
+        tin_high();
+        delay_us(50);
+        tin_low();
+        delay_us(10);
+        tnin_high();
+        delay_us(50);
+        tnin_low();
+        cka_high();
+        delay_us(50);
+        cka_low();
+        ckb_high();
+        delay_us(50);
+        ckb_low();
+        ckc_high();
+        delay_us(50);
+        ckc_low();
+        ckcal_high();
+        delay_us(50);
+        ckcal_low();
+        
+        set_high();
+        delay_us(50);
+        set_low();
+        rem_sel_high();
+        delay_us(50);
+        rem_sel_low();
+        radrvalid_high();
+        delay_us(50);
+        radrvalid_low();
+        rdtsth_high();
+        delay_us(50);
+        rdtsth_low();
+        rdclk_high();
+        delay_us(50);
+        rdclk_low();
+        rdparld_high();
+        delay_us(50);
+        rdparld_low();
+        
+        
+        
+        
+    }  // End of WHILE
+//
 //      check_inputs();
 //      init_chrono();
-
+    
 }  // End of main
 
 
@@ -790,65 +730,65 @@ hit_imlar_zero_high();                  // Release from 0 mVolts
 
 void ckcal_high()
 {
-   output_high(PIN_A0);   
+    output_high(PIN_A0);
 }
 
 void ckcal_low()
 {
-   output_low(PIN_A0);
+    output_low(PIN_A0);
 }
 
 
 void cka_high()
 {
-   output_high(PIN_A1);
+    output_high(PIN_A1);
 }
 
 void cka_low()
 {
-   output_low(PIN_A1);
+    output_low(PIN_A1);
 }
 
 void ckb_high()
 {
-   output_high(PIN_A2);
+    output_high(PIN_A2);
 }
 
 void ckb_low()
 {
-   output_low(PIN_A2);
+    output_low(PIN_A2);
 }
 
 
 void ckc_high()
 {
-   output_high(PIN_A3);
+    output_high(PIN_A3);
 }
 
 void ckc_low()
 {
-   output_low(PIN_A3);
+    output_low(PIN_A3);
 }
 
 
 void tnin_high()
 {
-   output_high(PIN_A4);
+    output_high(PIN_A4);
 }
 
 void tnin_low()
 {
-   output_low(PIN_A4);
+    output_low(PIN_A4);
 }
 
 void tin_high()
 {
-   output_high(PIN_A5);
+    output_high(PIN_A5);
 }
 
 void tin_low()
 {
-   output_low(PIN_A5);
+    output_low(PIN_A5);
 }
 
 //
@@ -857,95 +797,95 @@ void tin_low()
 
 void set_high()
 {
-   output_high(PIN_F0);
+    output_high(PIN_F0);
 }
 
 void set_low()
 {
-   output_low(PIN_F0);
+    output_low(PIN_F0);
 }
 
 void rem_sel_high()
 {
-   output_high(PIN_F1);
+    output_high(PIN_F1);
 }
 
 void rem_sel_low()
 {
-   output_low(PIN_F1);
+    output_low(PIN_F1);
 }
 
 void radrvalid_high()
 {
-   output_high(PIN_F2);
+    output_high(PIN_F2);
 }
 
 void radrvalid_low()
 {
-   output_low(PIN_F2);
+    output_low(PIN_F2);
 }
 
 void rdtsth_high()
 {
-   output_high(PIN_F3);
+    output_high(PIN_F3);
 }
 
 void rdtsth_low()
 {
-   output_low(PIN_F3);
+    output_low(PIN_F3);
 }
 
 void rdclk_high()
 {
-   output_high(PIN_F4);
+    output_high(PIN_F4);
 }
 
 void rdclk_low()
 {
-   output_low(PIN_F4);
+    output_low(PIN_F4);
 }
 
 void rdparld_high()
 {
-   output_high(PIN_F5);
+    output_high(PIN_F5);
 }
 
 void rdparld_low()
 {
-   output_low(PIN_F5);
+    output_low(PIN_F5);
 }
 
 void pdrst_high()
 {
-   output_high(PIN_F7);
+    output_high(PIN_F7);
 }
 
 void pdrst_low()
 {
-   output_low(PIN_F7);
+    output_low(PIN_F7);
 }
 
 void hit_imlar_high()
 {
-   hit_imlar_image = 64;
-   output_high(PIN_E6);
+    hit_imlar_image = 64;
+    output_high(PIN_E6);
 }
 
 void hit_imlar_low()
 {
-   hit_imlar_image = 0;
-   output_low(PIN_E6);
+    hit_imlar_image = 0;
+    output_low(PIN_E6);
 }
 void hit_imlar_zero_high()
 {
-   hit_imlar_zero_image = 128;
-   output_high(PIN_E7);
-
+    hit_imlar_zero_image = 128;
+    output_high(PIN_E7);
+    
 }
 void hit_imlar_zero_low()
 {
-   hit_imlar_zero_image = 0;
-   output_low(PIN_E7);
+    hit_imlar_zero_image = 0;
+    output_low(PIN_E7);
 }
 
 
@@ -959,813 +899,813 @@ void rdout()
 
 void check_inputs()
 {
-   portg_image = input_g();                       // Get input 2
-
-            sw_input = portg_image & (0b00010000); // G4
-            if(sw_input == 0)                // Check Switch One
-            {
-            }
-               sw_input = portg_image & (0b00001000); //G3
-               if(sw_input == 0)                // Check Switch Two
-               {
-               }
-                  sw_input = portg_image & (0b00000001); //G0
-                  if(sw_input == 0)                // Check Switch Three
-                  {
-                  }
-
+    portg_image = input_g();                       // Get input 2
+    
+    sw_input = portg_image & (0b00010000); // G4
+    if(sw_input == 0)                // Check Switch One
+    {
+    }
+    sw_input = portg_image & (0b00001000); //G3
+    if(sw_input == 0)                // Check Switch Two
+    {
+    }
+    sw_input = portg_image & (0b00000001); //G0
+    if(sw_input == 0)                // Check Switch Three
+    {
+    }
+    
 }
 void init_chrono()
 {
-   portc_image = 0;                       // Clear Time Stamp Counter
-   portb_image = 0;
-   portd_image = 0;
-   porte_image = 0;
-
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   tin_low();
-   tnin_low();
-   set_low();
-   rdparld_low();
-   
-   
+    portc_image = 0;                       // Clear Time Stamp Counter
+    portb_image = 0;
+    portd_image = 0;
+    porte_image = 0;
+    
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    tin_low();
+    tnin_low();
+    set_low();
+    rdparld_low();
+    
+    
 }
 
 void clear_chrono()
 {
-   portc_image = 0;                       // Clear Time Stamp Counter
-   portb_image = 0;
-   portd_image = 0;
-   porte_image = 0;
-
+    portc_image = 0;                       // Clear Time Stamp Counter
+    portb_image = 0;
+    portd_image = 0;
+    porte_image = 0;
+    
 }
 
 void count_chrono()                       // Increments the time stamp
 {
-   if(portc_image <255)
-   {
-   portc_image++;
-   }
-      else
-      {
-      portc_image = 0;
-         if(portb_image < 15)
-         {
-         portb_image++;
-         }
-            else
-            {
+    if(portc_image <255)
+    {
+        portc_image++;
+    }
+    else
+    {
+        portc_image = 0;
+        if(portb_image < 15)
+        {
+            portb_image++;
+        }
+        else
+        {
             portb_image = 0;
             portc_image = 0;
-            }
-      }
-//      
+        }
+    }
+//
 //Write Time Stamp Counter
 //
-output_c(portc_image);
-output_b(portb_image); 
+    output_c(portc_image);
+    output_b(portb_image);
 }
 
 void read_chrono()                        // Increments the row and column counters
 {
-   if(portd_image <47)                    // Row
-   {
-   portd_image++;
-   }
-      else
-      {
-      portd_image = 0;
-         if(porte_image < 47)             // Column
-         {
-         porte_image++;
-         }
-         else
-         {
-         porte_image = 0;
-         }
-      }
-output_d(portd_image);                      //Row and Column Counter
-output_e((porte_image + hit_imlar_image + hit_imlar_zero_image));
-
+    if(portd_image <47)                    // Row
+    {
+        portd_image++;
+    }
+    else
+    {
+        portd_image = 0;
+        if(porte_image < 47)             // Column
+        {
+            porte_image++;
+        }
+        else
+        {
+            porte_image = 0;
+        }
+    }
+    output_d(portd_image);                      //Row and Column Counter
+    output_e((porte_image + hit_imlar_image + hit_imlar_zero_image));
+    
 }
 
 void four_digit_display()
 {
-//      
+//
 // Thousands
 //
-      display_count = 0x30;
-      if (total_chrono_count >= 4000)
-      {
-      display_count = 0x34;
-      total_chrono_count = (total_chrono_count - 4000);
-      }
-      if (total_chrono_count >= 3000)
-      {
-      display_count = 0x33;
-       total_chrono_count = (total_chrono_count - 3000);
-      }
-      if (total_chrono_count >= 2000)
-      {
-      display_count = 0x32;
-       total_chrono_count = (total_chrono_count - 2000);
-      }
-      if (total_chrono_count >= 1000)
-      {
-      display_count = 0x31;
-       total_chrono_count = (total_chrono_count - 1000);
-      }
-      if (total_chrono_count < 1000)
-      {
-      putc(display_count);
-      }
-
+    display_count = 0x30;
+    if (total_chrono_count >= 4000)
+    {
+        display_count = 0x34;
+        total_chrono_count = (total_chrono_count - 4000);
+    }
+    if (total_chrono_count >= 3000)
+    {
+        display_count = 0x33;
+        total_chrono_count = (total_chrono_count - 3000);
+    }
+    if (total_chrono_count >= 2000)
+    {
+        display_count = 0x32;
+        total_chrono_count = (total_chrono_count - 2000);
+    }
+    if (total_chrono_count >= 1000)
+    {
+        display_count = 0x31;
+        total_chrono_count = (total_chrono_count - 1000);
+    }
+    if (total_chrono_count < 1000)
+    {
+        putc(display_count);
+    }
+    
 //
 // Hundreds
 //
-      display_count = 0x30;
-       if (total_chrono_count >= 900)
-      {
-      display_count = 0x39;
-       total_chrono_count = (total_chrono_count - 900);
-      }
-      if (total_chrono_count >= 800)
-      {
-      display_count = 0x38;
-       total_chrono_count = (total_chrono_count - 800);
-      }
-      if (total_chrono_count >= 700)
-      {
-      display_count = 0x37;
-       total_chrono_count = (total_chrono_count - 700);
-      }
-      if (total_chrono_count >= 600)
-      {
-      display_count = 0x36;
-       total_chrono_count = (total_chrono_count - 600);
-      }
-      if (total_chrono_count >= 500)
-      {
-      display_count = 0x35;
-       total_chrono_count = (total_chrono_count - 500);
-      }
-      if (total_chrono_count >= 400)
-      {
-      display_count = 0x34;
-       total_chrono_count = (total_chrono_count - 400);
-      }
-      if (total_chrono_count >= 300)
-      {
-      display_count = 0x33;
-       total_chrono_count = (total_chrono_count - 300);
-      }
-      if (total_chrono_count >= 200)
-      {
-      display_count = 0x32;
-       total_chrono_count = (total_chrono_count - 200);
-      }
-      if (total_chrono_count >= 100)
-      {
-      display_count = 0x31;
-       total_chrono_count = (total_chrono_count - 100);
-      }
-      putc(display_count);
+    display_count = 0x30;
+    if (total_chrono_count >= 900)
+    {
+        display_count = 0x39;
+        total_chrono_count = (total_chrono_count - 900);
+    }
+    if (total_chrono_count >= 800)
+    {
+        display_count = 0x38;
+        total_chrono_count = (total_chrono_count - 800);
+    }
+    if (total_chrono_count >= 700)
+    {
+        display_count = 0x37;
+        total_chrono_count = (total_chrono_count - 700);
+    }
+    if (total_chrono_count >= 600)
+    {
+        display_count = 0x36;
+        total_chrono_count = (total_chrono_count - 600);
+    }
+    if (total_chrono_count >= 500)
+    {
+        display_count = 0x35;
+        total_chrono_count = (total_chrono_count - 500);
+    }
+    if (total_chrono_count >= 400)
+    {
+        display_count = 0x34;
+        total_chrono_count = (total_chrono_count - 400);
+    }
+    if (total_chrono_count >= 300)
+    {
+        display_count = 0x33;
+        total_chrono_count = (total_chrono_count - 300);
+    }
+    if (total_chrono_count >= 200)
+    {
+        display_count = 0x32;
+        total_chrono_count = (total_chrono_count - 200);
+    }
+    if (total_chrono_count >= 100)
+    {
+        display_count = 0x31;
+        total_chrono_count = (total_chrono_count - 100);
+    }
+    putc(display_count);
 //
 // Tens
 //
-      display_count = 0x30;
-       if (total_chrono_count >= 90)
-      {
-      display_count = 0x39;
-       total_chrono_count = (total_chrono_count - 90);
-      }
-      if (total_chrono_count >= 80)
-      {
-      display_count = 0x38;
-       total_chrono_count = (total_chrono_count - 80);
-      }
-      if (total_chrono_count >= 70)
-      {
-      display_count = 0x37;
-       total_chrono_count = (total_chrono_count - 70);
-      }
-      if (total_chrono_count >= 60)
-      {
-      display_count = 0x36;
-       total_chrono_count = (total_chrono_count - 60);
-      }
-      if (total_chrono_count >= 50)
-      {
-      display_count = 0x35;
-       total_chrono_count = (total_chrono_count - 50);
-      }
-      if (total_chrono_count >= 40)
-      {
-      display_count = 0x34;
-       total_chrono_count = (total_chrono_count - 40);
-      }
-      if (total_chrono_count >= 30)
-      {
-      display_count = 0x33;
-       total_chrono_count = (total_chrono_count - 30);
-      }
-      if (total_chrono_count >= 20)
-      {
-      display_count = 0x32;
-       total_chrono_count = (total_chrono_count - 20);
-      }
-      if (total_chrono_count >= 10)
-      {
-      display_count = 0x31;
-       total_chrono_count = (total_chrono_count - 10);
-      }
-      putc(display_count);
-      
-       total_chrono_count = (total_chrono_count + 0x30);
-      putc(total_chrono_count);
-
-
+    display_count = 0x30;
+    if (total_chrono_count >= 90)
+    {
+        display_count = 0x39;
+        total_chrono_count = (total_chrono_count - 90);
+    }
+    if (total_chrono_count >= 80)
+    {
+        display_count = 0x38;
+        total_chrono_count = (total_chrono_count - 80);
+    }
+    if (total_chrono_count >= 70)
+    {
+        display_count = 0x37;
+        total_chrono_count = (total_chrono_count - 70);
+    }
+    if (total_chrono_count >= 60)
+    {
+        display_count = 0x36;
+        total_chrono_count = (total_chrono_count - 60);
+    }
+    if (total_chrono_count >= 50)
+    {
+        display_count = 0x35;
+        total_chrono_count = (total_chrono_count - 50);
+    }
+    if (total_chrono_count >= 40)
+    {
+        display_count = 0x34;
+        total_chrono_count = (total_chrono_count - 40);
+    }
+    if (total_chrono_count >= 30)
+    {
+        display_count = 0x33;
+        total_chrono_count = (total_chrono_count - 30);
+    }
+    if (total_chrono_count >= 20)
+    {
+        display_count = 0x32;
+        total_chrono_count = (total_chrono_count - 20);
+    }
+    if (total_chrono_count >= 10)
+    {
+        display_count = 0x31;
+        total_chrono_count = (total_chrono_count - 10);
+    }
+    putc(display_count);
+    
+    total_chrono_count = (total_chrono_count + 0x30);
+    putc(total_chrono_count);
+    
+    
 }
 
 void waveform_drdtst()                       //Read the Chronopixel
 {
-   chrono_data = 0;
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   rem_sel_low();
+    chrono_data = 0;
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    rem_sel_low();
 //   rdtslh_high();
-   rdtsth_low();
-   pdrst_high();
-   tnin_high();
-   delay_us(13);
-   tnin_low();
-   delay_us(13);
-   tin_high();
-   radrvalid_high();
-   delay_us(8);
-   rdparld_high();
-   delay_us(5);
-   tin_low();                 //t10
-   delay_us(5);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 2048);
-      }
-   delay_us(15);
-   rdparld_low();
-   delay_us(12);
-   rdclk_low();
-   delay_us(15);
-   rdclk_high();              //t20
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 1024);
-      }
-   delay_us(13);
-   radrvalid_low();
-   delay_us(13);
-   rdclk_low();
-   delay_us(20);
-   tnin_high();
-   delay_us(5);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 512);
-      }
-   
-   delay_us(13);
-   tnin_low();
-   delay_us(5);
-   rdclk_low();
-   delay_us(13);
-   tin_high();
-   delay_us(13);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 256);
-      }
-   
-   delay_us(13);
-   tin_low();
-   delay_us(13);
-   rdclk_low();               //t40
-   delay_us(25);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 128);
-      }
-   
-   delay_us(25);
-   rdclk_low();
-   delay_us(25);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 64);
-      }
-   
-   delay_us(20);
-   tnin_high();
-   delay_us(5);
-   rdclk_low();
-   delay_us(20);
-   tnin_low();                //t60
-   delay_us(5);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 32);
-      }
-   
-   delay_us(13);
-   tin_high();
-   delay_us(8);
-   rdclk_low();
-   delay_us(8);
-   tin_low();                 //t65
-   delay_us(5);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 16);
-      }
-   
-   delay_us(25);              //t70
-   rdclk_low();
-   delay_us(25);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 8);
-      }
-   
-   delay_us(25);
-   rdclk_low();               //t80
-   delay_us(13);
-   tnin_high();
-   delay_us(13);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 4);
-      }
-   
-   delay_us(13);
-   tnin_low();
-   delay_us(13);
-   rdclk_low();
-   delay_us(13);
-   tin_high();                //t90
-   delay_us(13);
-   rdclk_high();
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 2);
-      }
-   
-   delay_us(13);
-   tin_low();
-   delay_us(13);
-   rdclk_low();
-   delay_us(25);
-   rdclk_high();              //t100
-      if(input(PIN_F6))
-      {
-      chrono_data = (chrono_data + 1);
-      }
-   
-   delay_us(25);
-   rdclk_low();
-   delay_us(25);
+    rdtsth_low();
+    pdrst_high();
+    tnin_high();
+    delay_us(13);
+    tnin_low();
+    delay_us(13);
+    tin_high();
+    radrvalid_high();
+    delay_us(8);
+    rdparld_high();
+    delay_us(5);
+    tin_low();                 //t10
+    delay_us(5);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 2048);
+    }
+    delay_us(15);
+    rdparld_low();
+    delay_us(12);
+    rdclk_low();
+    delay_us(15);
+    rdclk_high();              //t20
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 1024);
+    }
+    delay_us(13);
+    radrvalid_low();
+    delay_us(13);
+    rdclk_low();
+    delay_us(20);
+    tnin_high();
+    delay_us(5);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 512);
+    }
+    
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    rdclk_low();
+    delay_us(13);
+    tin_high();
+    delay_us(13);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 256);
+    }
+    
+    delay_us(13);
+    tin_low();
+    delay_us(13);
+    rdclk_low();               //t40
+    delay_us(25);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 128);
+    }
+    
+    delay_us(25);
+    rdclk_low();
+    delay_us(25);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 64);
+    }
+    
+    delay_us(20);
+    tnin_high();
+    delay_us(5);
+    rdclk_low();
+    delay_us(20);
+    tnin_low();                //t60
+    delay_us(5);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 32);
+    }
+    
+    delay_us(13);
+    tin_high();
+    delay_us(8);
+    rdclk_low();
+    delay_us(8);
+    tin_low();                 //t65
+    delay_us(5);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 16);
+    }
+    
+    delay_us(25);              //t70
+    rdclk_low();
+    delay_us(25);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 8);
+    }
+    
+    delay_us(25);
+    rdclk_low();               //t80
+    delay_us(13);
+    tnin_high();
+    delay_us(13);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 4);
+    }
+    
+    delay_us(13);
+    tnin_low();
+    delay_us(13);
+    rdclk_low();
+    delay_us(13);
+    tin_high();                //t90
+    delay_us(13);
+    rdclk_high();
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 2);
+    }
+    
+    delay_us(13);
+    tin_low();
+    delay_us(13);
+    rdclk_low();
+    delay_us(25);
+    rdclk_high();              //t100
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 1);
+    }
+    
+    delay_us(25);
+    rdclk_low();
+    delay_us(25);
 //   rdclk_high();
 //      if(input(PIN_F6))
 //      {
 //      chrono_data = (chrono_data + 2048);
 //      }
-   
-   delay_us(13);
-   tnin_high();
-   delay_us(13);
+    
+    delay_us(13);
+    tnin_high();
+    delay_us(13);
 //   rdclk_low();
-   delay_us(13);
-   tnin_low();
-   delay_us(25);
-   tin_high();
-   delay_us(25);
-   tin_low();
-   delay_us(25);
- 
+    delay_us(13);
+    tnin_low();
+    delay_us(25);
+    tin_high();
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 //
 //
 //
 void waveform_mrst4()            // Memory Reset Test section
 {
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   set_high();
-   delay_us(25);
-   pdrst_low();
-   delay_us(25);
-   tnin_low();
-   delay_us(13);
-   tin_high();
-   set_low();
-   delay_us(25);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   delay_us(37);
-   tin_high();
-   cka_high();
-   delay_us(25);
-   tin_low();
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    pdrst_high();
+    set_high();
+    delay_us(25);
+    pdrst_low();
+    delay_us(25);
+    tnin_low();
+    delay_us(13);
+    tin_high();
+    set_low();
+    delay_us(25);
+    tin_low();                 //t11
+    delay_us(5);
+    tnin_high();
+    delay_us(37);
+    tnin_low();
+    delay_us(37);
+    tin_high();
+    cka_high();
+    delay_us(25);
+    tin_low();
 //   delay_us(25);// inserted on 3/30
-   tnin_high();               //t25
-   delay_us(25);
-   cka_low();
-   tnin_low();
-   delay_us(75);
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
+    tnin_high();               //t25
+    delay_us(25);
+    cka_low();
+    tnin_low();
+    delay_us(75);
+    tin_high();                //t38
+    delay_us(25);
+    tin_low();
+    delay_us(25);
 }
 
 
 /*void waveform_mrst4()            // Memory Reset
-{
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   set_high();
-   delay_us(25);
-   pdrst_low();
-   delay_us(25);
-   tnin_low();
-   delay_us(13);
-   tin_high();
-   set_low();
-   delay_us(25);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   delay_us(37);
-   tin_high();
-   cka_high();
-   delay_us(25);
-   tin_low();
-//   delay_us(25);// inserted on 3/30
-   tnin_high();               //t25
-   delay_us(25);
-   cka_low();
-   tnin_low();
-   delay_us(75);
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
-}
-*/
+ * {
+ * cka_low();
+ * ckb_low();
+ * ckc_low();
+ * ckcal_low();
+ * rdparld_low();
+ * rdclk_low();
+ * radrvalid_low();
+ * tnin_high();
+ * pdrst_high();
+ * set_high();
+ * delay_us(25);
+ * pdrst_low();
+ * delay_us(25);
+ * tnin_low();
+ * delay_us(13);
+ * tin_high();
+ * set_low();
+ * delay_us(25);
+ * tin_low();                 //t11
+ * delay_us(5);
+ * tnin_high();
+ * delay_us(37);
+ * tnin_low();
+ * delay_us(37);
+ * tin_high();
+ * cka_high();
+ * delay_us(25);
+ * tin_low();
+ * //   delay_us(25);// inserted on 3/30
+ * tnin_high();               //t25
+ * delay_us(25);
+ * cka_low();
+ * tnin_low();
+ * delay_us(75);
+ * tin_high();                //t38
+ * delay_us(25);
+ * tin_low();
+ * delay_us(25);
+ *
+ * }
+ */
 Void waveform_idle4()
 {
-            cka_low();
-            ckb_low();
-            ckc_low();
-            ckcal_low();
-            rdparld_low();
-            rdclk_low();
-            radrvalid_low();
-            pdrst_high();
-            tnin_high();
-            delay_us(13);
-            pdrst_low();
-            delay_us(13);
-            tnin_low();
-            delay_us(5);
-            tin_high();
-            delay_us(25);
-            tin_low();
-            delay_us(5);
-            tnin_high();
-            delay_us(25);
-            tnin_low();
-            delay_us(25);
-            tin_high();
-            delay_us(25);
-            tnin_high();
-            tin_low();
-            delay_us(25);
-            tnin_low();
-            delay_us(50);
-            tin_high();
-            delay_us(25);
-            tin_low();
-            delay_us(25);
-
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    pdrst_high();
+    tnin_high();
+    delay_us(13);
+    pdrst_low();
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    tin_high();
+    delay_us(25);
+    tin_low();
+    delay_us(5);
+    tnin_high();
+    delay_us(25);
+    tnin_low();
+    delay_us(25);
+    tin_high();
+    delay_us(25);
+    tnin_high();
+    tin_low();
+    delay_us(25);
+    tnin_low();
+    delay_us(50);
+    tin_high();
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 
 void waveform_wrtt4()
 {
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   delay_us(13);
-   pdrst_low();
-   delay_us(13);
-   tnin_low();
-   delay_us(5);
-   tin_high();
-   delay_us(25);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   delay_us(37);
-   tin_high();
-   cka_high();
-   delay_us(25);
-   tin_low();
-   tnin_high();               //t25
-   delay_us(25);
-   cka_low();
-   tnin_low();
-   delay_us(50);
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    set_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    pdrst_high();
+    delay_us(13);
+    pdrst_low();
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    tin_high();
+    delay_us(25);
+    tin_low();                 //t11
+    delay_us(5);
+    tnin_high();
+    delay_us(37);
+    tnin_low();
+    delay_us(37);
+    tin_high();
+    cka_high();
+    delay_us(25);
+    tin_low();
+    tnin_high();               //t25
+    delay_us(25);
+    cka_low();
+    tnin_low();
+    delay_us(50);
+    tin_high();                //t38
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 void waveform_wrtsig()
 {
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   delay_us(13);
-   pdrst_low();
-   delay_us(13);
-   tnin_low();
-   delay_us(5);
-   tin_high();
-   delay_us(25);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   delay_us(37);
-   tin_high();
-   cka_high();
-   delay_us(25);
-   tin_low();
-   tnin_high();               //t25
-   delay_us(25);
-   cka_low();
-   tnin_low();
-   delay_us(50);
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    set_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    pdrst_high();
+    delay_us(13);
+    pdrst_low();
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    tin_high();
+    delay_us(25);
+    tin_low();                 //t11
+    delay_us(5);
+    tnin_high();
+    delay_us(37);
+    tnin_low();
+    delay_us(37);
+    tin_high();
+    cka_high();
+    delay_us(25);
+    tin_low();
+    tnin_high();               //t25
+    delay_us(25);
+    cka_low();
+    tnin_low();
+    delay_us(50);
+    tin_high();                //t38
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 
 void waveform_calib4()
 {
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   delay_us(13);
-   pdrst_low();
-   delay_us(13);
-   tnin_low();
-   delay_us(5);
-   tin_high();
-   delay_us(20);
-   ckcal_high();
-   delay_us(5);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   ckcal_low();
-   delay_us(37);
-   tin_high();
-   cka_high();
-   ckc_high();
-   delay_us(25);
-   tin_low();
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    set_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    pdrst_high();
+    delay_us(13);
+    pdrst_low();
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    tin_high();
+    delay_us(20);
+    ckcal_high();
+    delay_us(5);
+    tin_low();                 //t11
+    delay_us(5);
+    tnin_high();
+    delay_us(37);
+    tnin_low();
+    ckcal_low();
+    delay_us(37);
+    tin_high();
+    cka_high();
+    ckc_high();
+    delay_us(25);
+    tin_low();
 //   delay_us(25);     //inserted on 3/30
-   tnin_high();               //t25
-   delay_us(25);
-   cka_low();
-   ckc_low();
-   tnin_low();
-   delay_us(25);// was 75
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
+    tnin_high();               //t25
+    delay_us(25);
+    cka_low();
+    ckc_low();
+    tnin_low();
+    delay_us(25);// was 75
+    tin_high();                //t38
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 
 void waveform_calin4()
 {
-   cka_low();
-   ckb_low();
-   ckc_high();
-   ckcal_high();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   pdrst_high();
-   delay_us(13);
-   pdrst_low();
-   delay_us(13);
-   tnin_low();
-   delay_us(5);
-   tin_high();
-   delay_us(25);
-   tin_low();                 //t11
-   delay_us(5);
-   tnin_high();                 
-   delay_us(37);
-   tnin_low();
-   delay_us(37);
-   tin_high();
-   delay_us(25);
-   tin_low();
+    cka_low();
+    ckb_low();
+    ckc_high();
+    ckcal_high();
+    set_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    pdrst_high();
+    delay_us(13);
+    pdrst_low();
+    delay_us(13);
+    tnin_low();
+    delay_us(5);
+    tin_high();
+    delay_us(25);
+    tin_low();                 //t11
+    delay_us(5);
+    tnin_high();
+    delay_us(37);
+    tnin_low();
+    delay_us(37);
+    tin_high();
+    delay_us(25);
+    tin_low();
 //   delay_us(25);        // inserted on 3/30
-   tnin_high();               //t25
-   delay_us(25);
-   tnin_low();
-   delay_us(25);// was 50
-   tin_high();                //t38
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
+    tnin_high();               //t25
+    delay_us(25);
+    tnin_low();
+    delay_us(25);// was 50
+    tin_high();                //t38
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
 }
 //
 //
 //
 /*
-void waveform_beam2()      // Test version
-{
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   delay_us(2);
-   pdrst_high();
-   delay_us(5);
-   tnin_low();
-   delay_us(5);
-   tin_high();
-   delay_us(2);
-   pdrst_low();
-   delay_us(10);
-   tin_low();                 //t10
-   delay_us(10);
-   tnin_high();                 
-   delay_us(12);
-   tnin_low();
-   delay_us(12);
-   tin_high();
-   delay_us(12);
-   tin_low();               //t25
-   delay_us(5);
-   tnin_high();
-   delay_us(12);
-   tnin_low();
-   delay_us(18);
-   cka_high();
-   tin_high();
-   delay_us(10);
-   tin_low();                //t38
-//   delay_us (10);
-   tnin_high();
-   delay_us(12);
-   tnin_low();
-   cka_low();
-   delay_us(18);
-   tin_high();
-   delay_us(12);
-   tin_low();
-   delay_us(12);
-
-}
-
-*/
+ * void waveform_beam2()      // Test version
+ * {
+ * cka_low();
+ * ckb_low();
+ * ckc_low();
+ * ckcal_low();
+ * set_low();
+ * rdparld_low();
+ * rdclk_low();
+ * radrvalid_low();
+ * tnin_high();
+ * delay_us(2);
+ * pdrst_high();
+ * delay_us(5);
+ * tnin_low();
+ * delay_us(5);
+ * tin_high();
+ * delay_us(2);
+ * pdrst_low();
+ * delay_us(10);
+ * tin_low();                 //t10
+ * delay_us(10);
+ * tnin_high();
+ * delay_us(12);
+ * tnin_low();
+ * delay_us(12);
+ * tin_high();
+ * delay_us(12);
+ * tin_low();               //t25
+ * delay_us(5);
+ * tnin_high();
+ * delay_us(12);
+ * tnin_low();
+ * delay_us(18);
+ * cka_high();
+ * tin_high();
+ * delay_us(10);
+ * tin_low();                //t38
+ * //   delay_us (10);
+ * tnin_high();
+ * delay_us(12);
+ * tnin_low();
+ * cka_low();
+ * delay_us(18);
+ * tin_high();
+ * delay_us(12);
+ * tin_low();
+ * delay_us(12);
+ *
+ * }
+ *
+ */
 //*
 
 void waveform_beam2()
 {
-   cka_low();
-   ckb_low();
-   ckc_low();
-   ckcal_low();
-   set_low();
-   rdparld_low();
-   rdclk_low();
-   radrvalid_low();
-   tnin_high();
-   delay_us(5);
-   pdrst_high();
-   delay_us(10);
-   tnin_low();
-   delay_us(10);
-   tin_high();
-   delay_us(5);
-   pdrst_low();
-   delay_us(20);
-   tin_low();                 //t10
-   delay_us(20);
-   tnin_high();                 
-   delay_us(25);
-   tnin_low();
-   delay_us(25);
-   tin_high();
-   delay_us(25);
-   tin_low();               //t25
-   delay_us(10);
-   tnin_high();
-   delay_us(25);
-   tnin_low();
-   delay_us(37);
-   cka_high();
-   tin_high();
-   delay_us(20);
-   tin_low();                //t38
-   tnin_high();
-   delay_us(25);
-   tnin_low();
-   cka_low();
-   delay_us(37);
-   tin_high();
-   delay_us(25);
-   tin_low();
-   delay_us(25);
-
-} 
+    cka_low();
+    ckb_low();
+    ckc_low();
+    ckcal_low();
+    set_low();
+    rdparld_low();
+    rdclk_low();
+    radrvalid_low();
+    tnin_high();
+    delay_us(5);
+    pdrst_high();
+    delay_us(10);
+    tnin_low();
+    delay_us(10);
+    tin_high();
+    delay_us(5);
+    pdrst_low();
+    delay_us(20);
+    tin_low();                 //t10
+    delay_us(20);
+    tnin_high();
+    delay_us(25);
+    tnin_low();
+    delay_us(25);
+    tin_high();
+    delay_us(25);
+    tin_low();               //t25
+    delay_us(10);
+    tnin_high();
+    delay_us(25);
+    tnin_low();
+    delay_us(37);
+    cka_high();
+    tin_high();
+    delay_us(20);
+    tin_low();                //t38
+    tnin_high();
+    delay_us(25);
+    tnin_low();
+    cka_low();
+    delay_us(37);
+    tin_high();
+    delay_us(25);
+    tin_low();
+    delay_us(25);
+    
+}
 //*/
 
 
