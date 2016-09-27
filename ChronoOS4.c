@@ -425,54 +425,31 @@ void main()
         }
         
 // Display the first group of columns
-//
-        
-        
-        delay_us(50);
         total_chrono_count = column_count1;
         four_digit_display();
-//
 // Display the second group of columns
-//
         putc(0x2C); //comma
-        delay_us(50);
         total_chrono_count = column_count2;
         four_digit_display();
-//
 // Display the third group of columns
-//
         putc(0x2C); //comma
-        delay_us(50);
         total_chrono_count = column_count3;
         four_digit_display();
-//
 // Display the fourth group of columns
-//
         putc(0x2C); //comma
-        delay_us(50);
         total_chrono_count = column_count4;
         four_digit_display();
-        
-//
 // Display the fifth group of columns
-//
         putc(0x2C); //comma
-        delay_us(50);
         total_chrono_count = column_count5;
         four_digit_display();
-//
 // Display the sixth group of columns
-//
         putc(0x2C); //comma
-        delay_us(50);
         total_chrono_count = column_count6;
         four_digit_display();
-        
-        putc(0x0d);                              // CR (carriage return) and
-        putc(0x0a);                              // LF (linefeed) between pixels
-////End Chris changes
-        
-//
+        putc(0x0d);		// CR (carriage return) and
+        putc(0x0a);   	// LF (linefeed) between pixels
+
 // Clear the storage
 //
         chrono_data_storage_pointer = 0;
