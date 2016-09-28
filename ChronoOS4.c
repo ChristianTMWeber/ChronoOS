@@ -1285,43 +1285,42 @@ void waveform_beam2()
     rdclk_low();
     radrvalid_low();
     tnin_high();
-    delay_us(5);
+    delay_us(2);
     pdrst_high();
-    delay_us(10);
-    tnin_low();
-    delay_us(10);
-    tin_high();
     delay_us(5);
-    pdrst_low();
-    delay_us(20);
-    tin_low();                 //t10
-    delay_us(20);
-    tnin_high();
-    delay_us(25);
     tnin_low();
-    delay_us(25);
+    delay_us(5);
     tin_high();
-    delay_us(25);
-    tin_low();               //t25
+    delay_us(2);
+    pdrst_low();
+    delay_us(10);
+    tin_low();                 //t10
     delay_us(10);
     tnin_high();
-    delay_us(25);
+    delay_us(12);
     tnin_low();
-    delay_us(37);
+    delay_us(12);
+    tin_high();
+    delay_us(12);
+    tin_low();               //t25
+    delay_us(5);
+    tnin_high();
+    delay_us(12);
+    tnin_low();
+    delay_us(17);
     cka_high();
     tin_high();
-    delay_us(20);
+    delay_us(10);
     tin_low();                //t38
     tnin_high();
-    delay_us(25);
+    delay_us(12);
     tnin_low();
     cka_low();
-    delay_us(37);
+    delay_us(17);
     tin_high();
-    delay_us(25);
+    delay_us(12);
     tin_low();
-    delay_us(25);
-    
+    delay_us(12);
 }
 //*/
 
