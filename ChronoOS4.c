@@ -1074,49 +1074,6 @@ void waveform_mrst4()            // Memory Reset Test section
 }
 
 
-/*void waveform_mrst4()            // Memory Reset
- * {
- * cka_low();
- * ckb_low();
- * ckc_low();
- * ckcal_low();
- * rdparld_low();
- * rdclk_low();
- * radrvalid_low();
- * tnin_high();
- * pdrst_high();
- * set_high();
- * delay_us(25);
- * pdrst_low();
- * delay_us(25);
- * tnin_low();
- * delay_us(13);
- * tin_high();
- * set_low();
- * delay_us(25);
- * tin_low();                 //t11
- * delay_us(5);
- * tnin_high();
- * delay_us(37);
- * tnin_low();
- * delay_us(37);
- * tin_high();
- * cka_high();
- * delay_us(25);
- * tin_low();
- * //   delay_us(25);// inserted on 3/30
- * tnin_high();               //t25
- * delay_us(25);
- * cka_low();
- * tnin_low();
- * delay_us(75);
- * tin_high();                //t38
- * delay_us(25);
- * tin_low();
- * delay_us(25);
- *
- * }
- */
 Void waveform_idle4()
 {
     cka_low();
