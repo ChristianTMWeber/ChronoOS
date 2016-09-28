@@ -1204,38 +1204,36 @@ void waveform_calib4()
     radrvalid_low();
     tnin_high();
     pdrst_high();
-    delay_us(13);
+    delay_us(6);//6
     pdrst_low();
-    delay_us(13);
+    delay_us(6);//6
     tnin_low();
-    delay_us(5);
+    delay_us(2);//2
     tin_high();
-    delay_us(20);
+    delay_us(10);//10
     ckcal_high();
-    delay_us(5);
+    delay_us(2);//2
     tin_low();                 //t11
-    delay_us(5);
+    delay_us(2);//2
     tnin_high();
-    delay_us(37);
+    delay_us(8);//17,8
     tnin_low();
     ckcal_low();
-    delay_us(37);
+    delay_us(8);//17,8
     tin_high();
     cka_high();
     ckc_high();
-    delay_us(25);
+    delay_us(25);//25
     tin_low();
-//   delay_us(25);     //inserted on 3/30
     tnin_high();               //t25
-    delay_us(25);
+    delay_us(12);//12
     cka_low();
     ckc_low();
     tnin_low();
-    delay_us(25);// was 75
+    delay_us(6);//12,6
     tin_high();                //t38
-    delay_us(25);
+    delay_us(6);//12,6
     tin_low();
-    delay_us(25);
     
 }
 
