@@ -458,34 +458,6 @@ void main()
             chrono_data_storage[chrono_data_storage_pointer] = 0;
             chrono_data_storage_pointer++;
         }
-        
-        
-        
-        /*
-   chrono_data_storage_pointer = 0;
-   while (chrono_data_storage_pointer < 500)
-   {
- 
-// Display the array
-      putc(0x10);
-      delay_us(50);
-      putc(0x70);
-      delay_us(50);
-      total_chrono_count = chrono_data_storage_pointer;
-      four_digit_display();
- 
-// Display the pixel readout
-      putc(0x10);
-      delay_us(50);
-      putc(0x75);
-      delay_us(50);
-      total_chrono_count = chrono_data_storage[chrono_data_storage_pointer];
-     four_digit_display();
-      delay_ms(100);                      // I need time to read the data
-      chrono_data_storage_pointer ++;
- 
-   }
-         */
     }     // End of while(TRUE)
 //
 //
@@ -504,52 +476,11 @@ void main()
     portd_image = 0;
     read_chrono();
     
-// Display the Row
-    putc(0x10);
-    delay_us(50);
-    putc(0x6b);
-    delay_us(50);
-    total_chrono_count = (portd_image);
-    four_digit_display();
-    
-// Display the column
-    putc(0x10);
-    delay_us(50);
-    putc(0x70);
-    delay_us(50);
-    total_chrono_count = (porte_image);
-    four_digit_display();
-    
-// Display the pixel readout
-    putc(0x10);
-    delay_us(50);
-    putc(0x75);
-    delay_us(50);
-    total_chrono_count = chrono_data_storage[1];
-//      total_chrono_count = chrono_data;
-    four_digit_display();
-    delay_ms(100);                      // I need time to read the data
-    
-//   }
-//}
+
     
     
     
-//
-// Test the wrtt4 routine
-//
-//      while(TRUE)
-//      {
-//      waveform_wrtt4();
-//      }
-    
-    
-// Test the calin4 routine
-//
-//      while(TRUE)
-//      {
-//      waveform_calin4();
-//      }
+
     
 //
 // Test the beam2 routine
@@ -586,62 +517,7 @@ void main()
             delay_us(100);
             printf("Idle");
         }
-//
-// Set cursor position (third line, fourth character)
-//
-        portg_image = input_g();                        // Get inputs from PortG
-        sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-        while((sw_input != 0)&& (run_mode == 0))
-        {
-            waveform_idle4();
-            portg_image = input_g();                        // Get inputs from PortG
-            sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-            
-        }
-        portg_image = input_g();                        // Get inputs from PortG
-        sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
-        if(sw_input == 0)                // Check Switch One
-        {
-            putc(0x10);
-            delay_us(50);
-            putc(0x6B);
-            delay_us(100);
-            printf("Run ");
-            
-            putc(0x10);
-            delay_us(50);
-            putc(0x70);
-            delay_us(100);
-            printf("    ");                                 // Remove Stop
-            
-            run_mode = 1;                                   // Set Run Mode Flag
-            
-        }
-        
-//
-// Display Row and Columns
-//
-        
-//      read_chrono();
-//      total_chrono_count = (portd_image );                  // Value to be displayed
-//      four_digit_display();                                 // Display Row
-//
-//
-// Set cursor position (third line, ninth character)
-//
-        
-//      putc(0x10);
-//      delay_us(50);
-//      putc(0x75);
-//      delay_us(100);
-//
-// Display Row and Columns
-//
-        
-//      total_chrono_count = (porte_image );                  // Value to be displayed
-//      four_digit_display();                                 // Display Column
-        
-        
+       
 //
 // Start control signals
 //
