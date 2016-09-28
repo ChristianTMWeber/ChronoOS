@@ -1085,30 +1085,29 @@ Void waveform_idle4()
     radrvalid_low();
     pdrst_high();
     tnin_high();
-    delay_us(13);
+    delay_us(1);//6
     pdrst_low();
-    delay_us(13);
+    delay_us(1);//6
     tnin_low();
-    delay_us(5);
+    delay_us(1);//2
     tin_high();
-    delay_us(25);
+    delay_us(2);//13
     tin_low();
-    delay_us(5);
+    delay_us(1);//2
     tnin_high();
-    delay_us(25);
+    delay_us(2);//13
     tnin_low();
-    delay_us(25);
+    delay_us(1);//13
     tin_high();
-    delay_us(25);
+    delay_us(2);//13
+    tin_low();
     tnin_high();
-    tin_low();
-    delay_us(25);
+    delay_us(2);//13
     tnin_low();
-    delay_us(50);
+    delay_us(1);//25
     tin_high();
-    delay_us(25);
+    delay_us(2);//13
     tin_low();
-    delay_us(25);
     
 }
 
