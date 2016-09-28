@@ -1153,43 +1153,43 @@ void waveform_wrtt4()
 
 void waveform_wrtsig()
 {
-    cka_low();
-    ckb_low();
-    ckc_low();
-    ckcal_low();
-    set_low();
-    rdparld_low();
-    rdclk_low();
-    radrvalid_low();
-    tnin_high();
-    pdrst_high();
-    delay_us(13);
-    pdrst_low();
-    delay_us(13);
-    tnin_low();
+    output_low(PIN_A1);           //cka low
+    output_low(PIN_A2);           //ckb low
+    output_low(PIN_A3);           //ckc low
+    output_low(PIN_A0);           //ckcla low
+    output_low(PIN_F0);           //set low
+    output_low(PIN_F5);           //rdparld low
+    output_low(PIN_F4);           //rdclk low
+    output_low(PIN_F2);           //radrvalid low
+    output_high(PIN_A4);          //tnin high
+    output_high(PIN_F7);          //pdrst high
     delay_us(5);
-    tin_high();
-    delay_us(25);
-    tin_low();                 //t11
-    delay_us(5);
-    tnin_high();
-    delay_us(37);
-    tnin_low();
-    delay_us(37);
-    tin_high();
-    cka_high();
-    delay_us(25);
-    tin_low();
-    tnin_high();               //t25
-    delay_us(25);
-    cka_low();
-    tnin_low();
-    delay_us(50);
-    tin_high();                //t38
-    delay_us(25);
-    tin_low();
-    delay_us(25);
-    
+    output_low(PIN_F7);           //pdrst low
+    delay_us(6);
+    output_low(PIN_A4);           //tnin low
+    delay_us(1);
+    output_high(PIN_A5);          //tin high
+    delay_us(2);
+    output_low(PIN_A5);           //tin low at t11
+    delay_us(1);
+    output_high(PIN_A4);          //tnin high
+    delay_us(2);
+    output_low(PIN_A4);           //tnin low
+    delay_us(2);
+    output_high(PIN_A5);          //tin high
+    delay_us(2);
+    output_high(PIN_A1);          //cka high at t24
+    delay_us(2);
+    output_low(PIN_A5);           //tin low
+    output_high(PIN_A4);          //tnin high at t25
+    delay_us(2);
+    output_low(PIN_A1);           //cka low
+    delay_us(2);
+    output_low(PIN_A4);           //tnin low
+    delay_us(1);
+    output_high(PIN_A5);          //tin high at t38
+    delay_us(2);
+    output_low(PIN_A5);           //tin low
 }
 
 void waveform_calib4()
