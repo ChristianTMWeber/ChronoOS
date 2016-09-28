@@ -1273,63 +1273,6 @@ void waveform_calin4()
     tin_low();
 //   delay_us(12);
 }
-//
-//
-//
-/*
- * void waveform_beam2()      // Test version
- * {
- * cka_low();
- * ckb_low();
- * ckc_low();
- * ckcal_low();
- * set_low();
- * rdparld_low();
- * rdclk_low();
- * radrvalid_low();
- * tnin_high();
- * delay_us(2);
- * pdrst_high();
- * delay_us(5);
- * tnin_low();
- * delay_us(5);
- * tin_high();
- * delay_us(2);
- * pdrst_low();
- * delay_us(10);
- * tin_low();                 //t10
- * delay_us(10);
- * tnin_high();
- * delay_us(12);
- * tnin_low();
- * delay_us(12);
- * tin_high();
- * delay_us(12);
- * tin_low();               //t25
- * delay_us(5);
- * tnin_high();
- * delay_us(12);
- * tnin_low();
- * delay_us(18);
- * cka_high();
- * tin_high();
- * delay_us(10);
- * tin_low();                //t38
- * //   delay_us (10);
- * tnin_high();
- * delay_us(12);
- * tnin_low();
- * cka_low();
- * delay_us(18);
- * tin_high();
- * delay_us(12);
- * tin_low();
- * delay_us(12);
- *
- * }
- *
- */
-//*
 
 void waveform_beam2()
 {
