@@ -1234,7 +1234,6 @@ void waveform_calib4()
     tin_high();                //t38
     delay_us(6);//12,6
     tin_low();
-    
 }
 
 void waveform_calin4()
@@ -1249,32 +1248,30 @@ void waveform_calin4()
     radrvalid_low();
     tnin_high();
     pdrst_high();
-    delay_us(13);
+    delay_us(1);
     pdrst_low();
-    delay_us(13);
+    delay_us(1);
     tnin_low();
-    delay_us(5);
+    delay_us(1);
     tin_high();
-    delay_us(25);
+    delay_us(2);
     tin_low();                 //t11
-    delay_us(5);
+    delay_us(1);
     tnin_high();
-    delay_us(37);
+    delay_us(2);
     tnin_low();
-    delay_us(37);
+    delay_us(1);
     tin_high();
-    delay_us(25);
+    delay_us(2);
     tin_low();
-//   delay_us(25);        // inserted on 3/30
     tnin_high();               //t25
-    delay_us(25);
+    delay_us(2);
     tnin_low();
-    delay_us(25);// was 50
+    delay_us(1);// was 50
     tin_high();                //t38
-    delay_us(25);
+    delay_us(2);
     tin_low();
-    delay_us(25);
-    
+//   delay_us(12);
 }
 //
 //
