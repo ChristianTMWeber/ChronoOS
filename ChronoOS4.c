@@ -450,14 +450,7 @@ void main()
         putc(0x0d);		// CR (carriage return) and
         putc(0x0a);   	// LF (linefeed) between pixels
 
-// Clear the storage
-//
-        chrono_data_storage_pointer = 0;
-        while (chrono_data_storage_pointer < 600)
-        {
-            chrono_data_storage[chrono_data_storage_pointer] = 0;
-            chrono_data_storage_pointer++;
-        }
+
     }     // End of while(TRUE)
 //
 //
