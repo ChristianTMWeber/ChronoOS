@@ -202,10 +202,12 @@ void waveform_wrtsig(void);
 long chrono_data_storage [600];
 long chrono_data_storage_pointer;
 
+long time; // to store the timer in
 
 
 void main()
-{
+{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_1); // start timer1, the 16 bit timer, see refernce page 92
+    // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
     clear_chrono();
     run_mode = 0;                             // Clear the run mode flag
     
