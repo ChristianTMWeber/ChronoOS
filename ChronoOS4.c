@@ -206,7 +206,7 @@ long time; // to store the timer in
 
 
 void main()
-{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_32); // start timer1, the 16 bit timer, see refernce page 92
+{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
     // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
     clear_chrono();
     run_mode = 0;                             // Clear the run mode flag
