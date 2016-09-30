@@ -304,7 +304,13 @@ void main()
         wrtsig_counter = 0;
         while(wrtsig_counter < 4095)        //Time Stamp 4095
         {
+            set_timer1(0); // reset timer to 0
             waveform_wrtsig(); // record particle incidents on the chronopixel
+            time = get_timer1(); // get the timer
+            fourOrFive_digit_display(time); // send the (possibly scaled) number of instructions to the serial port
+            putc(0x2C);         putc(0x0d);        putc(0x0a);    //comma // CR (carriage return) and // LF (linefeed) between pixels
+     
+ 
             wrtsig_counter++;
 /*
             //increment the timestamp to write to the chronopixel
