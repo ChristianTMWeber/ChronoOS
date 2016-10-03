@@ -202,7 +202,6 @@ void waveform_wrtsig(void);
 long chrono_data_storage [600];
 long chrono_data_storage_pointer;
 
-long time; // to store the timer in
 
 
 void main()
