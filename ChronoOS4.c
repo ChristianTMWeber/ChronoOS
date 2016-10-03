@@ -206,7 +206,7 @@ long time; // to store the timer in
 
 
 void main()
-{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_2); // start timer1, the 16 bit timer, see refernce page 92
+{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
     // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
     clear_chrono();
     run_mode = 0;                             // Clear the run mode flag
@@ -254,8 +254,8 @@ void main()
         
         portc_image = (0b00000000);            // Set timestamp to 0
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
-        output_c(portc_image);               // output to port c
-        output_b(portb_image);               // output to port b
+        output_c(portc_image);				   // output to port c
+        output_b(portb_image);				   // output to port b
         clear_chrono();
         
         idle4_counter = 0;
@@ -268,10 +268,9 @@ void main()
 //   hit_imlar_zero_low();                  // Release from 0 mVolts
 //   hit_imlar_high();                      // Pull VTH to 30 mV
 //    changed on 8/31/2016
-
         hit_imlar_zero_high();                  // Release from 0 mVolts
         hit_imlar_low();                      // Pull VTH to 30 mV
-
+        
         waveform_calin4();
         
         // calibrate repeatedly
@@ -281,40 +280,30 @@ void main()
             waveform_calib4();
             calib4_counter++;
         }
-
+        
         hit_imlar_zero_low();                  // Release VTH short
-
         hit_imlar_low();                       // VTH to 250 mV
-
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
-set_timer1(0); // reset timer to 0
         mrst4_counter = 0;
         while(mrst4_counter <5)
         {
             waveform_mrst4();
             mrst4_counter++;
         }
-time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C); 
-set_timer1(0); // reset timer to 0
         hit_imlar_high();                      // Pull VTH to 30 mV
-time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C); 
-set_timer1(0); // reset timer to 0
         hit_imlar_zero_high();                 // Pull VTH to 0mV
-time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C); 
         
 //
 ///*
         // set the timestamp to 1 and send it to the chronopixel
-set_timer1(0); // reset timer to 0
         portc_image = (0b00000001);            // Set a Stamp Counter
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
         output_c(portc_image);
         output_b(portb_image);
-time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C); 
 ///*
-set_timer1(0); // reset timer to 0
+                    set_timer1(0); // reset timer to 0
         wrtsig_counter = 0;
-        while(wrtsig_counter < 100)//4095)        //Time Stamp 4095
+        while(wrtsig_counter < 4095)        //Time Stamp 4095
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
@@ -326,11 +315,14 @@ set_timer1(0); // reset timer to 0
             {   portc_image = 0;
                 portb_image ++; // and port b for the remaining 4 (most) significant bits
             }
-           output_c(portc_image); //output the incremented timestamp to the chronopixel
-           output_b(portb_image);
+	        output_c(portc_image); //output the incremented timestamp to the chronopixel
+	     	output_b(portb_image);
 */
         }
-time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C); 
+                    time = get_timer1(); // get the timer
+            fourOrFive_digit_display(time); // send the (possibly scaled) number of instructions to the serial port
+            putc(0x2C);         putc(0x0d);        putc(0x0a);    //comma // CR (carriage return) and // LF (linefeed) between pixels
+     
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
@@ -456,8 +448,8 @@ time = get_timer1(); fourOrFive_digit_display(time);putc(0x2C);
 // Display the sixth group of columns
         putc(0x2C); //comma
         fourOrFive_digit_display(column_count6);
-        putc(0x0d);      // CR (carriage return) and
-        putc(0x0a);      // LF (linefeed) between pixels
+        putc(0x0d);		// CR (carriage return) and
+        putc(0x0a);   	// LF (linefeed) between pixels
     }     // End of while(TRUE)
 
 }  // End of main
