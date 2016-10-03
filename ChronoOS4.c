@@ -300,7 +300,7 @@ void main()
         output_c(portc_image);
         output_b(portb_image);
 ///*
-                    set_timer1(0); // reset timer to 0
+
         wrtsig_counter = 0;
         while(wrtsig_counter < 4095)        //Time Stamp 4095
         {
@@ -318,9 +318,7 @@ void main()
 	     	output_b(portb_image);
 */
         }
-                    time = get_timer1(); // get the timer
-            fourOrFive_digit_display(time); // send the (possibly scaled) number of instructions to the serial port
-            putc(0x2C);         putc(0x0d);        putc(0x0a);    //comma // CR (carriage return) and // LF (linefeed) between pixels
+
      
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
