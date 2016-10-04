@@ -954,158 +954,158 @@ void waveform_drdtst()                       //Read the Chronopixel
     pdrst_high();
     
     tnin_high();
-    delay_us(2);//13 6 3
+    delay_cycles(2);//13 6 3
     tnin_low();
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_high();
     radrvalid_high();
-    delay_us(1);//8 4 2
+    delay_cycles(1);//8 4 2
     rdparld_high();
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     tin_low();                 //t10
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_high();              //t11
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 2048);
     }
-    delay_us(2);//15 7 4
+    delay_cycles(2);//15 7 4
     rdparld_low();             //t15
-    delay_us(1);//12 6 3
+    delay_cycles(1);//12 6 3
     rdclk_low();
-    delay_us(2);//15 8 4
+    delay_cycles(2);//15 8 4
     rdclk_high();              //t20
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 1024);
     }
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     radrvalid_low();           //t22
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_low();               //t24
-    delay_us(1);//20 10 5
+    delay_cycles(1);//20 10 5
     tnin_high();               //t27
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_high();              //t28
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 512);
     }
     
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tnin_low();                //t31
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_low();               //t32
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_high();                //t35
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_high();              //t36
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 256);
     }
     
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_low();                 //t38
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_low();               //t40
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_high();              //t44
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 128);
     }
     
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_low();               //t48
-    delay_us(2);//25 12
+    delay_cycles(2);//25 12
     rdclk_high();              //t52
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 64);
     }
     
-    delay_us(1);//20 10 5
+    delay_cycles(1);//20 10 5
     tnin_high();               //t55
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_low();               //t56
-    delay_us(2);//20 10
+    delay_cycles(2);//20 10
     tnin_low();                //t59
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_high();              //t61
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 32);
     }
     
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_high();                //t63
-    delay_us(1);//8 4 2
+    delay_cycles(1);//8 4 2
     rdclk_low();               //t64
-    delay_us(1);//8 4 2
+    delay_cycles(1);//8 4 2
     tin_low();                 //t65
-    delay_us(1);//5 2
+    delay_cycles(1);//5 2
     rdclk_high();              //t68
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 16);
     }
     
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_low();               //t72
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_high();              //t76
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 8);
     }
     
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_low();               //t81
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tnin_high();               //t84
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_high();              //t85
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 4);
     }
     
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tnin_low();                //t87
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_low();               //t88
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_high();                //t91
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_high();              //t93
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 2);
     }
     
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     tin_low();                 //t94
-    delay_us(1);//13 6 3
+    delay_cycles(1);//13 6 3
     rdclk_low();               //t96
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_high();              //t100
     if(input(PIN_F6))
     {
         chrono_data = (chrono_data + 1);
     }
     
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     rdclk_low();               //t104
-    delay_us(3);//25 12 6
+    delay_cycles(3);//25 12 6
     tnin_high();               //t110
-    delay_us(3);//13 6
+    delay_cycles(3);//13 6
     tnin_low();                //t114
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     tin_high();                //t118
-    delay_us(2);//25 12 6
+    delay_cycles(2);//25 12 6
     tin_low();                 //t122
-//   delay_us(12);//25 12
+//   delay_cycles(12);//25 12
     
 }
 //
@@ -1123,33 +1123,33 @@ void waveform_mrst4()            // Memory Reset Test section
     tnin_high();
     pdrst_high();
     set_high();
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     pdrst_low();
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     tnin_low();
-    delay_us(3);//13,6
+    delay_cycles(3);//13,6
     tin_high();
     set_low();
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     tin_low();                 //t11
-    delay_us(2);//5,2
+    delay_cycles(2);//5,2
     tnin_high();
-    delay_us(9);//37,18
+    delay_cycles(9);//37,18
     tnin_low();
-    delay_us(9);//37,18
+    delay_cycles(9);//37,18
     tin_high();
     cka_high();
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     tin_low();
     tnin_high();               //t25
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     cka_low();
     tnin_low();
-    delay_us(18);//75,36
+    delay_cycles(18);//75,36
     tin_high();                //t38
-    delay_us(6);//25,12
+    delay_cycles(6);//25,12
     tin_low();
-//   delay_us(12);//25
+//   delay_cycles(12);//25
 }
 
 
@@ -1164,28 +1164,28 @@ Void waveform_idle4()
     radrvalid_low();
     pdrst_high();
     tnin_high();
-    delay_us(1);//6
+    delay_cycles(1);//6
     pdrst_low();
-    delay_us(1);//6
+    delay_cycles(1);//6
     tnin_low();
-    delay_us(1);//2
+    delay_cycles(1);//2
     tin_high();
-    delay_us(2);//13
+    delay_cycles(2);//13
     tin_low();
-    delay_us(1);//2
+    delay_cycles(1);//2
     tnin_high();
-    delay_us(2);//13
+    delay_cycles(2);//13
     tnin_low();
-    delay_us(1);//13
+    delay_cycles(1);//13
     tin_high();
-    delay_us(2);//13
+    delay_cycles(2);//13
     tin_low();
     tnin_high();
-    delay_us(2);//13
+    delay_cycles(2);//13
     tnin_low();
-    delay_us(1);//25
+    delay_cycles(1);//25
     tin_high();
-    delay_us(2);//13
+    delay_cycles(2);//13
     tin_low();
     
 }
@@ -1202,32 +1202,32 @@ void waveform_wrtt4()
     radrvalid_low();
     tnin_high();
     pdrst_high();
-    delay_us(3);//6
+    delay_cycles(3);//6
     pdrst_low();
-    delay_us(3);//6
+    delay_cycles(3);//6
     tnin_low();
-    delay_us(1);//2
+    delay_cycles(1);//2
     tin_high();
-    delay_us(6);//13
+    delay_cycles(6);//13
     tin_low();                 //t11
-    delay_us(1);//2
+    delay_cycles(1);//2
     tnin_high();
-    delay_us(8);//17
+    delay_cycles(8);//17
     tnin_low();
-    delay_us(8);//17
+    delay_cycles(8);//17
     tin_high();
     cka_high();
-    delay_us(6);//13
+    delay_cycles(6);//13
     tin_low();
     tnin_high();               //t25
-    delay_us(6);//13
+    delay_cycles(6);//13
     cka_low();
     tnin_low();
-    delay_us(12);//25
+    delay_cycles(12);//25
     tin_high();                //t38
-    delay_us(6);//13
+    delay_cycles(6);//13
     tin_low();
-    delay_us(6);//13
+    delay_cycles(6);//13
 }
 
 void waveform_wrtsig()
@@ -1242,32 +1242,32 @@ void waveform_wrtsig()
     output_low(PIN_F2);           //radrvalid low
     output_high(PIN_A4);          //tnin high
     output_high(PIN_F7);          //pdrst high
-    delay_us(5);
+    delay_cycles(5);
     output_low(PIN_F7);           //pdrst low
-    delay_us(6);
+    delay_cycles(6);
     output_low(PIN_A4);           //tnin low
-    delay_us(1);
+    delay_cycles(1);
     output_high(PIN_A5);          //tin high
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A5);           //tin low at t11
-    delay_us(1);
+    delay_cycles(1);
     output_high(PIN_A4);          //tnin high
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A4);           //tnin low
-    delay_us(2);
+    delay_cycles(2);
     output_high(PIN_A5);          //tin high
-    delay_us(2);
+    delay_cycles(2);
     output_high(PIN_A1);          //cka high at t24
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A5);           //tin low
     output_high(PIN_A4);          //tnin high at t25
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A1);           //cka low
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A4);           //tnin low
-    delay_us(1);
+    delay_cycles(1);
     output_high(PIN_A5);          //tin high at t38
-    delay_us(2);
+    delay_cycles(2);
     output_low(PIN_A5);           //tin low
 }
 
@@ -1283,35 +1283,35 @@ void waveform_calib4()
     radrvalid_low();
     tnin_high();
     pdrst_high();
-    delay_us(6);//6
+    delay_cycles(6);//6
     pdrst_low();
-    delay_us(6);//6
+    delay_cycles(6);//6
     tnin_low();
-    delay_us(2);//2
+    delay_cycles(2);//2
     tin_high();
-    delay_us(10);//10
+    delay_cycles(10);//10
     ckcal_high();
-    delay_us(2);//2
+    delay_cycles(2);//2
     tin_low();                 //t11
-    delay_us(2);//2
+    delay_cycles(2);//2
     tnin_high();
-    delay_us(8);//17,8
+    delay_cycles(8);//17,8
     tnin_low();
     ckcal_low();
-    delay_us(8);//17,8
+    delay_cycles(8);//17,8
     tin_high();
     cka_high();
     ckc_high();
-    delay_us(25);//25
+    delay_cycles(25);//25
     tin_low();
     tnin_high();               //t25
-    delay_us(12);//12
+    delay_cycles(12);//12
     cka_low();
     ckc_low();
     tnin_low();
-    delay_us(6);//12,6
+    delay_cycles(6);//12,6
     tin_high();                //t38
-    delay_us(6);//12,6
+    delay_cycles(6);//12,6
     tin_low();
 }
 
@@ -1327,30 +1327,30 @@ void waveform_calin4()
     radrvalid_low();
     tnin_high();
     pdrst_high();
-    delay_us(1);
+    delay_cycles(1);
     pdrst_low();
-    delay_us(1);
+    delay_cycles(1);
     tnin_low();
-    delay_us(1);
+    delay_cycles(1);
     tin_high();
-    delay_us(2);
+    delay_cycles(2);
     tin_low();                 //t11
-    delay_us(1);
+    delay_cycles(1);
     tnin_high();
-    delay_us(2);
+    delay_cycles(2);
     tnin_low();
-    delay_us(1);
+    delay_cycles(1);
     tin_high();
-    delay_us(2);
+    delay_cycles(2);
     tin_low();
     tnin_high();               //t25
-    delay_us(2);
+    delay_cycles(2);
     tnin_low();
-    delay_us(1);// was 50
+    delay_cycles(1);// was 50
     tin_high();                //t38
-    delay_us(2);
+    delay_cycles(2);
     tin_low();
-//   delay_us(12);
+//   delay_cycles(12);
 }
 
 void waveform_beam2()
@@ -1364,42 +1364,42 @@ void waveform_beam2()
     rdclk_low();
     radrvalid_low();
     tnin_high();
-    delay_us(2);
+    delay_cycles(2);
     pdrst_high();
-    delay_us(5);
+    delay_cycles(5);
     tnin_low();
-    delay_us(5);
+    delay_cycles(5);
     tin_high();
-    delay_us(2);
+    delay_cycles(2);
     pdrst_low();
-    delay_us(10);
+    delay_cycles(10);
     tin_low();                 //t10
-    delay_us(10);
+    delay_cycles(10);
     tnin_high();
-    delay_us(12);
+    delay_cycles(12);
     tnin_low();
-    delay_us(12);
+    delay_cycles(12);
     tin_high();
-    delay_us(12);
+    delay_cycles(12);
     tin_low();               //t25
-    delay_us(5);
+    delay_cycles(5);
     tnin_high();
-    delay_us(12);
+    delay_cycles(12);
     tnin_low();
-    delay_us(17);
+    delay_cycles(17);
     cka_high();
     tin_high();
-    delay_us(10);
+    delay_cycles(10);
     tin_low();                //t38
     tnin_high();
-    delay_us(12);
+    delay_cycles(12);
     tnin_low();
     cka_low();
-    delay_us(17);
+    delay_cycles(17);
     tin_high();
-    delay_us(12);
+    delay_cycles(12);
     tin_low();
-    delay_us(12);
+    delay_cycles(12);
 }
 //*/
 
