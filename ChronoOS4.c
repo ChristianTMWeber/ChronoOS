@@ -168,7 +168,7 @@ void readout(void);
 void get_switch(void);
 void fourOrFive_digit_display(long serialOutInteger); // sends the argument integer to the serial port
 void waveform_drdtst(void);
-void waveform_mrst4(void);
+
 void waveform_idle4(void);
 void waveform_wrtt4(void);
 void waveform_calib4(void);
@@ -179,6 +179,8 @@ long chrono_data_storage [600];
 long chrono_data_storage_pointer;
 
 long time; // to store the timer in
+
+#include "mrst4.h"
 
 void main()
 {   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
@@ -732,46 +734,7 @@ void waveform_drdtst()                       //Read the Chronopixel
 //
 //
 //
-void waveform_mrst4()            // Memory Reset Test section
-{
-    cka_low();
-    ckb_low();
-    ckc_low();
-    ckcal_low();
-    rdparld_low();
-    rdclk_low();
-    radrvalid_low();
-    tnin_high();
-    pdrst_high();
-    set_high();
-    delay_us(6);//25,12
-    pdrst_low();
-    delay_us(6);//25,12
-    tnin_low();
-    delay_us(3);//13,6
-    tin_high();
-    set_low();
-    delay_us(6);//25,12
-    tin_low();                 //t11
-    delay_us(2);//5,2
-    tnin_high();
-    delay_us(9);//37,18
-    tnin_low();
-    delay_us(9);//37,18
-    tin_high();
-    cka_high();
-    delay_us(6);//25,12
-    tin_low();
-    tnin_high();               //t25
-    delay_us(6);//25,12
-    cka_low();
-    tnin_low();
-    delay_us(18);//75,36
-    tin_high();                //t38
-    delay_us(6);//25,12
-    tin_low();
-//   delay_us(12);//25
-}
+
 
 
 Void waveform_idle4()
