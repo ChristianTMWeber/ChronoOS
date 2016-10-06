@@ -1,6 +1,10 @@
 int display_count;
 void fourOrFive_digit_display(long serialOutInteger); 
 
+// sends the argument integer to the serial port
+// capable of sending a 16 bit unsigned integer
+// transmits four of five digits, depending on whether the 10^4 digit is 0 or not
+
 void fourOrFive_digit_display(long serialOutInteger)// sends the argument integer to the serial port
 {
 //

@@ -162,7 +162,6 @@ void waveform_beam2(void);  // ? in use at all ?
 void get_switch(void);      // ? in use at all ?  ! has not even a definition !
 
 
-void read_chrono(void);
 
 void hit_imlar_high(void);
 void hit_imlar_low(void);
@@ -183,6 +182,7 @@ void hit_imlar_zero_low(void);
 
 // non waveform related functions
 #include "FourOrFiveDigitDisplay.h"
+#include "noneWaveformFunctions.h"
 
 void main()
 {   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
@@ -528,32 +528,8 @@ void count_chrono()                       // Increments the time stamp
     output_b(portb_image);
 }
 
-void read_chrono()                        // Increments the row and column counters
-{
-    if(portd_image <47)                    // Row
-    {
-        portd_image++;
-    }
-    else
-    {
-        portd_image = 0;
-        if(porte_image < 47)             // Column
-        {
-            porte_image++;
-        }
-        else
-        {
-            porte_image = 0;
-        }
-    }
-    output_d(portd_image);                      //Row and Column Counter
-    output_e((porte_image + hit_imlar_image + hit_imlar_zero_image));
-    
-}
 
-// sends the argument integer to the serial port
-// capable of sending a 16 bit unsigned integer
-// transmits four of five digits, depending on whether the 10^4 digit is 0 or not
+
 
 
 
