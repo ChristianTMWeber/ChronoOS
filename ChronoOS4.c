@@ -185,8 +185,10 @@ void hit_imlar_zero_low(void);
 #include "noneWaveformFunctions.h"
 
 void main()
-{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
+{   setup_timer_1(T1_INTERNAL|T1_DIV_BY_4); // start timer1, the 16 bit timer, see refernce page 92
     // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
+
+    time = get_timer1();
 
     run_mode = 0;                             // Clear the run mode flag
     
@@ -231,8 +233,8 @@ void main()
         
         portc_image = (0b00000000);            // Set timestamp to 0
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
-        output_c(portc_image);				   // output to port c
-        output_b(portb_image);				   // output to port b
+        output_c(portc_image);               // output to port c
+        output_b(portb_image);               // output to port b
         
         idle4_counter = 0;
         while(idle4_counter <5)
@@ -250,12 +252,14 @@ void main()
         waveform_calin4();
         
         // calibrate repeatedly
+        set_timer1(0); // reset the timer to 0
         calib4_counter = 0;
         while(calib4_counter <100)
         {
             waveform_calib4();
             calib4_counter++;
         }
+        time = get_timer1(); // save the timer
         
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
@@ -291,8 +295,8 @@ void main()
             {   portc_image = 0;
                 portb_image ++; // and port b for the remaining 4 (most) significant bits
             }
-	        output_c(portc_image); //output the incremented timestamp to the chronopixel
-	     	output_b(portb_image);
+           output_c(portc_image); //output the incremented timestamp to the chronopixel
+           output_b(portb_image);
 */
         }
 
@@ -422,8 +426,11 @@ void main()
 // Display the sixth group of columns
         putc(0x2C); //comma
         fourOrFive_digit_display(column_count6);
-        putc(0x0d);		// CR (carriage return) and
-        putc(0x0a);   	// LF (linefeed) between pixels
+// Display the timer
+        putc(0x2C); //comma
+        fourOrFive_digit_display(time);
+        putc(0x0d);      // CR (carriage return) and
+        putc(0x0a);      // LF (linefeed) between pixels
     }     // End of while(TRUE)
 
 }  // End of main
