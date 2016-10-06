@@ -99,7 +99,6 @@
  *
  */
 #include "C:\Dropbox\ChronoPixel\ChronoOS\ChronoOSHeader.h"
-#include "wrtsig.h"
 #include "PinsToFunctions.h"
 #include "FourOrFiveDigitDisplay.h"
 //
@@ -150,11 +149,7 @@ long column_count6;
 // setup functions
 //
 
-void init_chrono(void);
-void clear_chrono(void);
-void read_chrono(void);
-void count_chrono(void);
-void check_inputs(void);
+
 
 
 void hit_imlar_high(void);
@@ -163,27 +158,37 @@ void hit_imlar_zero_high(void);
 void hit_imlar_zero_low(void);
 
 
-void readout(void);
+
 
 void get_switch(void);
 void fourOrFive_digit_display(long serialOutInteger); // sends the argument integer to the serial port
 
+void clear_chrono(void); // ? does this do anything ?
 
-void waveform_idle4(void);
-void waveform_wrtt4(void);
-
-
-void waveform_beam2(void);
+void waveform_wrtt4(void);  // ? in use at all ? 
+void waveform_beam2(void);  // ? in use at all ?
+void init_chrono(void);     // ? in use at all ?
+void count_chrono(void);    // ? in use at all ?
+void check_inputs(void);    // ? in use at all ?
+void readout(void);         // not even a definition!
 
 long chrono_data_storage [600];
 long chrono_data_storage_pointer;
 
 long time; // to store the timer in
 
+// waveform files
+#include "wrtsig.h"
 #include "mrst4.h"
 #include "drdtst.h"
 #include "calin4.h"
 #include "calib4.h"
+#include "idle4.h"
+
+// non-waveform functions
+#include "read_chrono.h"
+#include "noneWaveformFunctions.h"
+
 
 void main()
 {   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
@@ -501,18 +506,8 @@ void init_chrono()
     tnin_low();
     set_low();
     rdparld_low();
-    
-    
 }
 
-void clear_chrono()
-{
-    portc_image = 0;                       // Clear Time Stamp Counter
-    portb_image = 0;
-    portd_image = 0;
-    porte_image = 0;
-    
-}
 
 void count_chrono()                       // Increments the time stamp
 {
@@ -540,26 +535,13 @@ void count_chrono()                       // Increments the time stamp
     output_b(portb_image);
 }
 
-void read_chrono()                        // Increments the row and column counters
+
+void clear_chrono()
 {
-    if(portd_image <47)                    // Row
-    {
-        portd_image++;
-    }
-    else
-    {
-        portd_image = 0;
-        if(porte_image < 47)             // Column
-        {
-            porte_image++;
-        }
-        else
-        {
-            porte_image = 0;
-        }
-    }
-    output_d(portd_image);                      //Row and Column Counter
-    output_e((porte_image + hit_imlar_image + hit_imlar_zero_image));
+    portc_image = 0;                       // Clear Time Stamp Counter
+    portb_image = 0;
+    portd_image = 0;
+    porte_image = 0;
     
 }
 
@@ -573,44 +555,6 @@ void read_chrono()                        // Increments the row and column count
 //
 //
 
-
-
-Void waveform_idle4()
-{
-    cka_low();
-    ckb_low();
-    ckc_low();
-    ckcal_low();
-    rdparld_low();
-    rdclk_low();
-    radrvalid_low();
-    pdrst_high();
-    tnin_high();
-    delay_us(1);//6
-    pdrst_low();
-    delay_us(1);//6
-    tnin_low();
-    delay_us(1);//2
-    tin_high();
-    delay_us(2);//13
-    tin_low();
-    delay_us(1);//2
-    tnin_high();
-    delay_us(2);//13
-    tnin_low();
-    delay_us(1);//13
-    tin_high();
-    delay_us(2);//13
-    tin_low();
-    tnin_high();
-    delay_us(2);//13
-    tnin_low();
-    delay_us(1);//25
-    tin_high();
-    delay_us(2);//13
-    tin_low();
-    
-}
 
 void waveform_wrtt4()
 {
