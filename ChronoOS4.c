@@ -162,7 +162,6 @@ void waveform_beam2(void);  // ? in use at all ?
 void get_switch(void);      // ? in use at all ?  ! has not even a definition !
 
 
-void clear_chrono(void);
 void read_chrono(void);
 
 void hit_imlar_high(void);
@@ -188,7 +187,7 @@ void hit_imlar_zero_low(void);
 void main()
 {   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
     // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
-    clear_chrono();
+
     run_mode = 0;                             // Clear the run mode flag
     
     set_tris_a(0b00000000);
@@ -203,8 +202,6 @@ void main()
 //
     delay_ms(500);
     
-// Clear the Chronopixel by setting ports c though e to zero (but we still need to output, right?)
-    clear_chrono();                     // Clear the Chronopixel
     
 // set and output port c and d to 0
 // these two ports seem related to setting the timestamps on the chronopixel
@@ -236,7 +233,6 @@ void main()
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
         output_c(portc_image);				   // output to port c
         output_b(portb_image);				   // output to port b
-        clear_chrono();
         
         idle4_counter = 0;
         while(idle4_counter <5)
@@ -505,14 +501,6 @@ void init_chrono()
     
 }
 
-void clear_chrono()
-{
-    portc_image = 0;                       // Clear Time Stamp Counter
-    portb_image = 0;
-    portd_image = 0;
-    porte_image = 0;
-    
-}
 
 void count_chrono()                       // Increments the time stamp
 {
