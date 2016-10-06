@@ -99,9 +99,7 @@
  *
  */
 #include "C:\Dropbox\ChronoPixel\ChronoOS\ChronoOSHeader.h"
-#include "wrtsig.h"
-#include "PinsToFunctions.h"
-#include "FourOrFiveDigitDisplay.h"
+
 //
 // IIC setup
 //
@@ -118,26 +116,26 @@
 // setup variables
 //
 
-int porta_image;
+int porta_image;    //never used!
 int portb_image;
 int portc_image;
 int portd_image;
 int porte_image;
-int portf_image;
+int portf_image;    //never used!
 int portg_image;
 int sw_input;
-long total_chrono_count;
+long total_chrono_count;    //never used!
 long chrono_data;
 int run_mode;                    //Flag set when in run mode
-int pdrst_flag;
-int data_in;
+int pdrst_flag;     //never used!
+int data_in;    //never used!
 long calib4_counter;
 long idle4_counter;
 long mrst4_counter;
 int hit_imlar_image;
 int hit_imlar_zero_image;
-long error_count;
-long error_check;
+long error_count;   //never used!
+long error_check;   //never used!
 long wrtsig_counter;
 long column_count1;
 long column_count2;
@@ -146,44 +144,46 @@ long column_count4;
 long column_count5;
 long column_count6;
 
+long chrono_data_storage [600]; //never used!
+long chrono_data_storage_pointer; //never used!
+
+long time; // to store the timer in
+
 //
 // setup functions
 //
 
-void init_chrono(void);
+void init_chrono(void);     // ? in use at all ?
+void count_chrono(void);    // ? in use at all ?
+void check_inputs(void);    // ? in use at all ?
+void readout(void);         // ? in use at all ?  ! has not even a definition !
+void waveform_wrtt4(void);  // ? in use at all ?
+void waveform_beam2(void);  // ? in use at all ?
+void get_switch(void);      // ? in use at all ?  ! has not even a definition !
+
+
 void clear_chrono(void);
 void read_chrono(void);
-void count_chrono(void);
-void check_inputs(void);
-
 
 void hit_imlar_high(void);
 void hit_imlar_low(void);
 void hit_imlar_zero_high(void);
 void hit_imlar_zero_low(void);
 
-
-void readout(void);
-
-void get_switch(void);
-void fourOrFive_digit_display(long serialOutInteger); // sends the argument integer to the serial port
+// change individual pins by calling chronopixel specific function (like pdrst_high instead of output_high(PIN_F7);)
+#include "PinsToFunctions.h"
 
 
-void waveform_wrtt4(void);
-
-
-void waveform_beam2(void);
-
-long chrono_data_storage [600];
-long chrono_data_storage_pointer;
-
-long time; // to store the timer in
-
+// waveform definitions and declarations
+#include "wrtsig.h"
 #include "mrst4.h"
 #include "drdtst.h"
 #include "calin4.h"
 #include "calib4.h"
 #include "idle4.h"
+
+// non waveform related functions
+#include "FourOrFiveDigitDisplay.h"
 
 void main()
 {   setup_timer_1(T1_INTERNAL|T1_DIV_BY_8); // start timer1, the 16 bit timer, see refernce page 92
