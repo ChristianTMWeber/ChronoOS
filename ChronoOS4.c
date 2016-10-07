@@ -148,6 +148,7 @@ long chrono_data_storage [600]; //never used!
 long chrono_data_storage_pointer; //never used!
 
 long time; // to store the timer in
+long codeIterationLimit;
 
 //
 // setup functions
@@ -214,10 +215,15 @@ void main()
     
 //
 //
-//
+codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
+        if(codeIterationLimit < 2048)
+            {codeIterationLimit += 1;}
+        else
+            {codeIterationLimit = 1;}
+
         portg_image = input_g();                        // Get inputs from PortG
         sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
         if(sw_input !=0)
@@ -254,7 +260,7 @@ void main()
         // calibrate repeatedly
         set_timer1(0); // reset the timer to 0
         calib4_counter = 0;
-        while(calib4_counter <100)
+        while(calib4_counter <codeIterationLimit)
         {
             waveform_calib4();
             calib4_counter++;
@@ -429,6 +435,9 @@ void main()
 // Display the timer
         putc(0x2C); //comma
         fourOrFive_digit_display(time);
+// Display the number of code iterations
+        putc(0x2C); //comma
+        fourOrFive_digit_display(codeIterationLimit);
         putc(0x0d);      // CR (carriage return) and
         putc(0x0a);      // LF (linefeed) between pixels
     }     // End of while(TRUE)
