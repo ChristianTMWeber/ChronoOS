@@ -219,7 +219,7 @@ codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 2048)
+        if(codeIterationLimit < 4095)
             {codeIterationLimit += 1;}
         else
             {codeIterationLimit = 1;}
@@ -258,24 +258,24 @@ codeIterationLimit = 0;
         waveform_calin4();
         
         // calibrate repeatedly
-        set_timer1(0); // reset the timer to 0
         calib4_counter = 0;
-        while(calib4_counter <codeIterationLimit)
+        while(calib4_counter <100)
         {
             waveform_calib4();
             calib4_counter++;
         }
-        time = get_timer1(); // save the timer
         
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
+        set_timer1(0); // reset the timer to 0
         mrst4_counter = 0;
         while(mrst4_counter <5)
         {
             waveform_mrst4();
             mrst4_counter++;
         }
+        time = get_timer1(); // save the timer
         hit_imlar_high();                      // Pull VTH to 30 mV
         hit_imlar_zero_high();                 // Pull VTH to 0mV
         
@@ -289,7 +289,7 @@ codeIterationLimit = 0;
 ///*
 
         wrtsig_counter = 0;
-        while(wrtsig_counter < 4095)        //Time Stamp 4095
+        while(wrtsig_counter < codeIterationLimit)        //Time Stamp 4095
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
