@@ -181,7 +181,8 @@ void hit_imlar_zero_low(void);
 #include "idle4.h"
 
 // non waveform related functions
-#include "FourOrFiveDigitDisplay.h"
+//#include "FourOrFiveDigitDisplay.h"
+#include "twoDigitDisplay.h"
 #include "noneWaveformFunctions.h"
 
 void main()
@@ -320,117 +321,27 @@ void main()
         column_count5 = 0;
         column_count6 = 0;
         wrtsig_counter = 0;
-        while(wrtsig_counter <384)         // First eight columns. Number of total pixels is 2304
-        {
-            waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
-            if(chrono_data != 0)
-            {
-                column_count1++;
-            }
-            wrtsig_counter++;
-            
-        }
-//
-//
-//
-        while(wrtsig_counter <768)         // Second eight columns. Number of total pixels is 2304
-        {
-            waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
-            if(chrono_data != 0)
-            {
-                column_count2++;
-            }
-            wrtsig_counter++;
-            
-        }
-//
-//
-//
-        while(wrtsig_counter <1152)         // Third eight columns. Number of total pixels is 2304
-        {
-            waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
-            if(chrono_data != 0)
-            {
-                column_count3++;
-            }
-            wrtsig_counter++;
-            
-        }
-//
-//
-//
-        while(wrtsig_counter <1536)         // Forth eight columns. Number of total pixels is 2304
-        {
-            waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
-            if(chrono_data != 0)
-            {
-                column_count4++;
-            }
-            wrtsig_counter++;
-            
-        }
-        
-//
-//
-//
-        while(wrtsig_counter <1920)         // Fifth eight columns. Number of total pixels is 2304
-        {
-            waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
-            if(chrono_data != 0)
-            {
-                column_count5++;
-            }
-            wrtsig_counter++;
-            
-        }
-//
-//
+
 //
         while(wrtsig_counter <2304)         // Sixth(last) eight columns. Number of total pixels is 2304
         {
             waveform_drdtst();                     // Read the timestamp from the pixel
-            read_chrono();                         // Increment the rows and columns
-            
             if(chrono_data != 0)
             {
-                column_count6++;
+                
+                twoDigitDisplay(portd_image); // Output the row of the hit pixel
+                putc(0x2C); //comma
+                twoDigitDisplay(porte_image); // Output the column of the hit pixel
+                putc(0x0d);      // CR (carriage return) and
+                putc(0x0a);      // LF (linefeed) between pixels
             }
+            read_chrono();                         // Increment the rows and columns
+            
+
             wrtsig_counter++;
             
         }
         
-// Display the first group of columns
-        fourOrFive_digit_display(column_count1);
-// Display the second group of columns
-        putc(0x2C); //comma
-        fourOrFive_digit_display(column_count2);
-// Display the third group of columns
-        putc(0x2C); //comma
-        fourOrFive_digit_display(column_count3);
-// Display the fourth group of columns
-        putc(0x2C); //comma
-        fourOrFive_digit_display(column_count4);
-// Display the fifth group of columns
-        putc(0x2C); //comma
-        fourOrFive_digit_display(column_count5);
-// Display the sixth group of columns
-        putc(0x2C); //comma
-        fourOrFive_digit_display(column_count6);
-// Display the timer
-        putc(0x2C); //comma
-        fourOrFive_digit_display(time);
-        putc(0x0d);      // CR (carriage return) and
-        putc(0x0a);      // LF (linefeed) between pixels
     }     // End of while(TRUE)
 
 }  // End of main
