@@ -219,7 +219,7 @@ codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 200)
+        if(codeIterationLimit < 100)
             {codeIterationLimit += 1;}
         else
             {codeIterationLimit = 1;}
@@ -269,14 +269,14 @@ codeIterationLimit = 0;
         hit_imlar_low();                       // VTH to 250 mV
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
         
-        set_timer1(0); // reset the timer to 0
+
         mrst4_counter = 0;
-        while(mrst4_counter <codeIterationLimit)
+        while(mrst4_counter <5)
         {
             waveform_mrst4();
             mrst4_counter++;
         }
-        time = get_timer1(); // save the timer
+
 
         hit_imlar_high();                      // Pull VTH to 30 mV
         hit_imlar_zero_high();                 // Pull VTH to 0mV
@@ -289,9 +289,9 @@ codeIterationLimit = 0;
         output_c(portc_image);
         output_b(portb_image);
 ///*
-
+        set_timer1(0); // reset the timer to 0
         wrtsig_counter = 0;
-        while(wrtsig_counter < 4095)        //Time Stamp 4095
+        while(wrtsig_counter < codeIterationLimit)        //Time Stamp 4095
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
@@ -307,7 +307,7 @@ codeIterationLimit = 0;
            output_b(portb_image);
 */
         }
-     
+        time = get_timer1(); // save the timer
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
