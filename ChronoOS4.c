@@ -219,8 +219,8 @@ codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 20000)
-            {codeIterationLimit =codeIterationLimit + 10;}
+        if(codeIterationLimit < 10000)
+            {codeIterationLimit += 10;}
         else
             {codeIterationLimit = 1;}
 
@@ -294,7 +294,7 @@ codeIterationLimit = 0;
         wrtsig_counter = 0;
         while(wrtsig_counter < 1)        //Time Stamp 4095
         {
-            waveform_wrtsig(); // record particle incidents on the chronopixel
+            //waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
 /*
             //increment the timestamp to write to the chronopixel
