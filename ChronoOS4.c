@@ -276,7 +276,7 @@ codeIterationLimit = 0;
             waveform_mrst4();
             mrst4_counter++;
         }
-        set_timer1(0); // reset the timer to 0
+
 
 
         hit_imlar_high();                      // Pull VTH to 30 mV
@@ -290,8 +290,7 @@ codeIterationLimit = 0;
         output_c(portc_image);
         output_b(portb_image);
 ///*    
-        delay_us(codeIterationLimit);
-        time = get_timer1(); // save the timer
+
         wrtsig_counter = 0;
         while(wrtsig_counter < 1)        //Time Stamp 4095
         {
@@ -309,13 +308,14 @@ codeIterationLimit = 0;
            output_b(portb_image);
 */
         }
-
+    set_timer1(0); // reset the timer to 0
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
         output_b(portb_image);
         
-        
+    delay_us(codeIterationLimit);
+  
 //
 // Write to memory
 //
@@ -329,6 +329,7 @@ codeIterationLimit = 0;
         column_count5 = 0;
         column_count6 = 0;
         wrtsig_counter = 0;
+    time = get_timer1(); // save the timer  
         while(wrtsig_counter <384)         // First eight columns. Number of total pixels is 2304
         {
             waveform_drdtst();                     // Read the timestamp from the pixel
