@@ -219,8 +219,8 @@ codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 10000)
-            {codeIterationLimit += 10;}
+        if(codeIterationLimit < 1000)
+            {codeIterationLimit += 1;}
         else
             {codeIterationLimit = 1;}
 
@@ -276,7 +276,7 @@ codeIterationLimit = 0;
             waveform_mrst4();
             mrst4_counter++;
         }
-
+    set_timer1(0); // reset the timer to 0
 
 
         hit_imlar_high();                      // Pull VTH to 30 mV
@@ -308,13 +308,20 @@ codeIterationLimit = 0;
            output_b(portb_image);
 */
         }
-    set_timer1(0); // reset the timer to 0
+
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
         output_b(portb_image);
-        
-    delay_us(codeIterationLimit);
+
+
+        idle4_counter = 0;
+        while(idle4_counter < codeIterationLimit)
+        {
+            waveform_idle4();
+            idle4_counter++;
+        }
+
   
 //
 // Write to memory
