@@ -219,8 +219,8 @@ codeIterationLimit = 0;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 20)
-            {codeIterationLimit += 1;}
+        if(codeIterationLimit < 20000)
+            {codeIterationLimit =codeIterationLimit + 10;}
         else
             {codeIterationLimit = 1;}
 
@@ -269,14 +269,15 @@ codeIterationLimit = 0;
         hit_imlar_low();                       // VTH to 250 mV
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
         
-        set_timer1(0); // reset the timer to 0
+        
         mrst4_counter = 0;
-        while(mrst4_counter <codeIterationLimit)
+        while(mrst4_counter <1)
         {
             waveform_mrst4();
             mrst4_counter++;
         }
-        time = get_timer1(); // save the timer
+        set_timer1(0); // reset the timer to 0
+
 
         hit_imlar_high();                      // Pull VTH to 30 mV
         hit_imlar_zero_high();                 // Pull VTH to 0mV
@@ -288,8 +289,9 @@ codeIterationLimit = 0;
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
         output_c(portc_image);
         output_b(portb_image);
-///*
-
+///*    
+        delay_us(codeIterationLimit);
+        time = get_timer1(); // save the timer
         wrtsig_counter = 0;
         while(wrtsig_counter < 1)        //Time Stamp 4095
         {
