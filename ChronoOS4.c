@@ -289,12 +289,21 @@ codeIterationLimit = 0;
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
         output_c(portc_image);
         output_b(portb_image);
-///*    
 
+                idle4_counter = 0;
+        while(idle4_counter < codeIterationLimit)
+        {
+            waveform_idle4();
+            idle4_counter++;
+        }
+
+  
+///*    
+    time = get_timer1(); // save the timer  
         wrtsig_counter = 0;
         while(wrtsig_counter < 1)        //Time Stamp 4095
         {
-            //waveform_wrtsig(); // record particle incidents on the chronopixel
+            waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
 /*
             //increment the timestamp to write to the chronopixel
@@ -336,7 +345,6 @@ codeIterationLimit = 0;
         column_count5 = 0;
         column_count6 = 0;
         wrtsig_counter = 0;
-    time = get_timer1(); // save the timer  
         while(wrtsig_counter <384)         // First eight columns. Number of total pixels is 2304
         {
             waveform_drdtst();                     // Read the timestamp from the pixel
