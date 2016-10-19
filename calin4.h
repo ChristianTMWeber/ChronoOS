@@ -2,38 +2,84 @@ void waveform_calin4(void);
 
 void waveform_calin4()
 {
-    cka_low();
-    ckb_low();
-    ckc_high();
-    ckcal_high();
-    set_low();
-    rdparld_low();
-    rdclk_low();
-    radrvalid_low();
-    tnin_high();
-    pdrst_high();
-    delay_us(1);
-    pdrst_low();
-    delay_us(1);
-    tnin_low();
-    delay_us(1);
-    tin_high();
-    delay_us(2);
-    tin_low();                 //t11
-    delay_us(1);
-    tnin_high();
-    delay_us(2);
-    tnin_low();
-    delay_us(1);
-    tin_high();
-    delay_us(2);
-    tin_low();
-    tnin_high();               //t25
-    delay_us(2);
-    tnin_low();
-    delay_us(1);// was 50
-    tin_high();                //t38
-    delay_us(2);
-    tin_low();
-//   delay_us(12);
+output_a(0b00000000);
+output_a(0b00010000);
+pdrst_high();
+delay_cycles(1);
+pdrst_low();
+output_a(0b00000000);
+output_a(0b00100000);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00100001);
+output_a(0b00000001);
+output_a(0b00010001);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00000000);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00101010);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00011010);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00000000);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00100000);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+delay_cycles(1);
+output_a(0b00000000);
 }
+
+/*
+{
+cka_low();
+ckb_low();
+ckc_high();
+ckcal_high();
+set_low();
+rdparld_low();
+rdclk_low();
+radrvalid_low();
+tnin_high();
+pdrst_high();
+delay_us(1);
+pdrst_low();
+delay_us(1);
+tnin_low();
+delay_us(1);
+tin_high();
+delay_us(2);
+tin_low();//t11
+delay_us(1);
+tnin_high();
+delay_us(2);
+tnin_low();
+delay_us(1);
+tin_high();
+delay_us(2);
+tin_low();
+tnin_high();//t25
+delay_us(2);
+tnin_low();
+delay_us(1);//was50
+tin_high();//t38
+delay_us(2);
+tin_low();
+//delay_us(12);
+}
+*/
