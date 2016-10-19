@@ -215,7 +215,7 @@ void main()
     
 //
 //
-codeIterationLimit = 0;
+codeIterationLimit = 1;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
