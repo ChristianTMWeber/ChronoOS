@@ -1,5 +1,53 @@
 void waveform_calin4(void);
 
+// Pinouts:   [A7   A6   A5  A4   A3  A2  A1  A0]
+// Function:  [none none tin tnin ckc ckb cka ckcal]
+void waveform_calin4()
+{
+output_a(0b00001001);
+output_a(0b00011001);
+pdrst_high();
+delay_cycles(5);
+pdrst_low();
+output_a(0b00001001);
+output_a(0b00101001);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00101001);
+output_a(0b00001001);
+output_a(0b00011001);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00001001);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00101001);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00011001);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00001001);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00101001);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+delay_cycles(5);
+output_a(0b00001001);
+}
+
+/*
 void waveform_calin4()
 {
 cka_low();
@@ -37,3 +85,4 @@ delay_us(2);
 tin_low();
 //delay_us(12);
 }
+*/

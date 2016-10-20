@@ -1,10 +1,11 @@
 void waveform_calib4(void);
 
 
+// Pinouts:   [A7   A6   A5  A4   A3  A2  A1  A0]
+// Function:  [none none tin tnin ckc ckb cka ckcal]
+
 void waveform_calib4()
 {
-//Pinouts:   [A7 A6A A% A4 A3 A2 A1 A0]
-//Function:  [none none tin tnin ckc ckb cka ckcal]
 output_a(0b00000000);
 output_a(0b00010000);
 pdrst_high();

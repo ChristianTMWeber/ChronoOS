@@ -1,6 +1,174 @@
 void waveform_drdtst(void);
 
+// Pinouts:   [A7   A6   A5  A4   A3  A2  A1  A0]
+// Function:  [none none tin tnin ckc ckb cka ckcal]
+
+//Pinouts:   [F7    F6   F5      F4    F3     F2        F1      F0]
+//Function:  [pdrst none rdparld rdclk rdtsth radrvalid rem_sel set]
+
 void waveform_drdtst()                       //Read the Chronopixel
+{
+    chrono_data = 0;
+    output_a(0b00000000); //Function:  [none none tin tnin ckc ckb cka ckcal]
+    output_f(0b10000000); //Function:  [pdrst none rdparld rdclk rdtsth radrvalid rem_sel set]
+    
+    tnin_high();
+    delay_cycles(5);//13 6 3
+    tnin_low();
+    delay_cycles(5);//13 6 3
+    tin_high();
+    radrvalid_high();
+    delay_cycles(5);//8 4 2
+    rdparld_high();
+    delay_cycles(5);//5 2
+    tin_low();                 //t10
+    delay_cycles(5);//5 2
+    rdclk_high();              //t11
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 2048);
+    }
+    delay_cycles(5);//15 7 4
+    rdparld_low();             //t15
+    delay_cycles(5);//12 6 3
+    rdclk_low();
+    delay_cycles(5);//15 8 4
+    rdclk_high();              //t20
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 1024);
+    }
+    delay_cycles(5);//13 6 3
+    radrvalid_low();           //t22
+    delay_cycles(5);//13 6 3
+    rdclk_low();               //t24
+    delay_cycles(5);//20 10 5
+    tnin_high();               //t27
+    delay_cycles(5);//5 2
+    rdclk_high();              //t28
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 512);
+    }
+    
+    delay_cycles(5);//13 6 3
+    tnin_low();                //t31
+    delay_cycles(5);//5 2
+    rdclk_low();               //t32
+    delay_cycles(5);//13 6 3
+    tin_high();                //t35
+    delay_cycles(5);//13 6 3
+    rdclk_high();              //t36
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 256);
+    }
+    
+    delay_cycles(5);//13 6 3
+    tin_low();                 //t38
+    delay_cycles(5);//13 6 3
+    rdclk_low();               //t40
+    delay_cycles(5);//25 12 6
+    rdclk_high();              //t44
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 128);
+    }
+    
+    delay_cycles(5);//25 12 6
+    rdclk_low();               //t48
+    delay_cycles(5);//25 12
+    rdclk_high();              //t52
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 64);
+    }
+    
+    delay_cycles(5);//20 10 5
+    tnin_high();               //t55
+    delay_cycles(5);//5 2
+    rdclk_low();               //t56
+    delay_cycles(5);//20 10
+    tnin_low();                //t59
+    delay_cycles(5);//5 2
+    rdclk_high();              //t61
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 32);
+    }
+    
+    delay_cycles(5);//13 6 3
+    tin_high();                //t63
+    delay_cycles(5);//8 4 2
+    rdclk_low();               //t64
+    delay_cycles(5);//8 4 2
+    tin_low();                 //t65
+    delay_cycles(5);//5 2
+    rdclk_high();              //t68
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 16);
+    }
+    
+    delay_cycles(5);//25 12 6
+    rdclk_low();               //t72
+    delay_cycles(5);//25 12 6
+    rdclk_high();              //t76
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 8);
+    }
+    
+    delay_cycles(5);//25 12 6
+    rdclk_low();               //t81
+    delay_cycles(5);//13 6 3
+    tnin_high();               //t84
+    delay_cycles(5);//13 6 3
+    rdclk_high();              //t85
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 4);
+    }
+    
+    delay_cycles(5);//13 6 3
+    tnin_low();                //t87
+    delay_cycles(5);//13 6 3
+    rdclk_low();               //t88
+    delay_cycles(5);//13 6 3
+    tin_high();                //t91
+    delay_cycles(5);//13 6 3
+    rdclk_high();              //t93
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 2);
+    }
+    
+    delay_cycles(5);//13 6 3
+    tin_low();                 //t94
+    delay_cycles(5);//13 6 3
+    rdclk_low();               //t96
+    delay_cycles(5);//25 12 6
+    rdclk_high();              //t100
+    if(input(PIN_F6))
+    {
+        chrono_data = (chrono_data + 1);
+    }
+    
+    delay_cycles(5);//25 12 6
+    rdclk_low();               //t104
+    delay_cycles(5);//25 12 6
+    tnin_high();               //t110
+    delay_cycles(5);//13 6
+    tnin_low();                //t114
+    delay_cycles(5);//25 12 6
+    tin_high();                //t118
+    delay_cycles(5);//25 12 6
+    tin_low();                 //t122
+//   delay_us(12);//25 12
+}
+
+/*
+
 {
     chrono_data = 0;
     cka_low();
@@ -166,3 +334,5 @@ void waveform_drdtst()                       //Read the Chronopixel
 //   delay_us(12);//25 12
     
 }
+
+*/
