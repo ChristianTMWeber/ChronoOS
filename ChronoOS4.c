@@ -323,14 +323,6 @@ codeIterationLimit = 1;
         output_c(portc_image);
         output_b(portb_image);
 
-
-        idle4_counter = 0;
-        while(idle4_counter < codeIterationLimit)
-        {
-            waveform_idle4();
-            idle4_counter++;
-        }
-
   
 //
 // Write to memory
