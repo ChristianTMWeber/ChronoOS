@@ -219,8 +219,8 @@ codeIterationLimit = 1;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
-        if(codeIterationLimit < 10000)
-            {codeIterationLimit += 10;}
+        if(codeIterationLimit < 1000)
+            {codeIterationLimit += 1;}
         else
             {codeIterationLimit = 1;}
 
@@ -259,12 +259,13 @@ codeIterationLimit = 1;
         
         // calibrate repeatedly
         calib4_counter = 0;
-        while(calib4_counter <100)
+        while(calib4_counter < 100)
         {
             waveform_calib4();
             calib4_counter++;
         }
-        
+        set_timer1(0); // reset the timer to 0
+
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
@@ -276,7 +277,7 @@ codeIterationLimit = 1;
             waveform_mrst4();
             mrst4_counter++;
         }
-    set_timer1(0); // reset the timer to 0
+  
 
 
         hit_imlar_high();                      // Pull VTH to 30 mV
@@ -290,18 +291,20 @@ codeIterationLimit = 1;
         output_c(portc_image);
         output_b(portb_image);
 
-                idle4_counter = 0;
+        /*
+        idle4_counter = 0;
         while(idle4_counter < codeIterationLimit)
         {
             waveform_idle4();
             idle4_counter++;
         }
+        */
 
   
 ///*    
-    time = get_timer1(); // save the timer  
+
         wrtsig_counter = 0;
-        while(wrtsig_counter < 1)        //Time Stamp 4095
+        while(wrtsig_counter < codeIterationLimit)        //Time Stamp 4095
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
@@ -317,7 +320,7 @@ codeIterationLimit = 1;
            output_b(portb_image);
 */
         }
-
+        time = get_timer1(); // save the timer  
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
