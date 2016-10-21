@@ -2,7 +2,7 @@ void waveform_wrtsig(void);
 
 // Pinouts:   [A7   A6   A5  A4   A3  A2  A1  A0]
 // Function:  [none none tin tnin ckc ckb cka ckcal]
-
+/*
 void waveform_wrtsig()
 {
 output_a(0b00000000);
@@ -47,11 +47,11 @@ delay_cycles(5);
 delay_cycles(5);
 output_a(0b00000000);
 }
+*/
 
 
 
-/*
-voidwaveform_wrtsig()
+void waveform_wrtsig()
 {
 output_low(PIN_A1);//ckalow
 output_low(PIN_A2);//ckblow
@@ -91,4 +91,3 @@ output_high(PIN_A5);//tinhighatt38
 delay_us(2);
 output_low(PIN_A5);//tinlow
 }
-*/

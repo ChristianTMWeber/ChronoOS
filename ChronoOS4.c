@@ -220,7 +220,7 @@ codeIterationLimit = 1;
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
         if(codeIterationLimit < 1000)
-            {codeIterationLimit += 1;}
+            {codeIterationLimit += 2;}
         else
             {codeIterationLimit = 1;}
 
