@@ -181,7 +181,7 @@ void hit_imlar_zero_low(void);
 #include "idle4.h"
 
 // non waveform related functions
-//#include "FourOrFiveDigitDisplay.h"
+#include "FourOrFiveDigitDisplay.h"
 #include "twoDigitDisplay.h"
 #include "noneWaveformFunctions.h"
 
@@ -253,14 +253,12 @@ void main()
         waveform_calin4();
         
         // calibrate repeatedly
-        set_timer1(0); // reset the timer to 0
         calib4_counter = 0;
         while(calib4_counter <100)
         {
             waveform_calib4();
             calib4_counter++;
         }
-        time = get_timer1(); // save the timer
         
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
@@ -288,7 +286,7 @@ void main()
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
-/*
+
             //increment the timestamp to write to the chronopixel
             if(portc_image <255) //port c seems to be responsible for the 8 least significant bits
             { portc_image ++;}               // Increment Time Stamp Counter
@@ -298,7 +296,7 @@ void main()
             }
            output_c(portc_image); //output the incremented timestamp to the chronopixel
            output_b(portb_image);
-*/
+
         }
 
      
@@ -328,12 +326,28 @@ void main()
             waveform_drdtst();                     // Read the timestamp from the pixel
             if(chrono_data != 0)
             {
-                
+//                    set_timer1(0);   
+waveform_idle4();
+//                       time = get_timer1();
                 twoDigitDisplay(portd_image); // Output the row of the hit pixel
-                putc(0x2C); //comma
+waveform_idle4();
+               putc(0x2C); //comma
+waveform_idle4();
                 twoDigitDisplay(porte_image); // Output the column of the hit pixel
+waveform_idle4();
+                putc(0x2C); //comma
+waveform_idle4();
+                fourOrFive_digit_display(chrono_data);
+ waveform_idle4();
+                putc(0x2C); //comma
+waveform_idle4();
+                
+                fourOrFive_digit_display(time);
+waveform_idle4();
                 putc(0x0d);      // CR (carriage return) and
+waveform_idle4();
                 putc(0x0a);      // LF (linefeed) between pixels
+waveform_idle4();
             }
             read_chrono();                         // Increment the rows and columns
             

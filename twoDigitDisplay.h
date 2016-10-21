@@ -1,4 +1,4 @@
-int display_count;
+
 void fourOrFive_digit_display(long serialOutInteger); 
 
 // sends the argument integer to the serial port
@@ -7,7 +7,7 @@ void fourOrFive_digit_display(long serialOutInteger);
 
 void twoDigitDisplay(int serialOutInteger)// sends the argument integer to the serial port
 {
-
+int display_count;
 // Tens
 //
     display_count = 0x30;
