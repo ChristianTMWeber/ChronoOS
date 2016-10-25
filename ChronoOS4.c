@@ -109,7 +109,7 @@
 //
 //
 //
-#use delay(clock = 20000000)
+#use delay(clock = 25000000)
 
 
 //
@@ -304,7 +304,7 @@ codeIterationLimit = 1;
 ///*    
 
         wrtsig_counter = 0;
-        while(wrtsig_counter < codeIterationLimit)        //Time Stamp 4095
+        while(wrtsig_counter < 4095)        //Time Stamp 4095
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
@@ -450,8 +450,8 @@ codeIterationLimit = 1;
         putc(0x2C); //comma
         fourOrFive_digit_display(time);
 // Display the number of code iterations
-        putc(0x2C); //comma
-        fourOrFive_digit_display(codeIterationLimit);
+     //   putc(0x2C); //comma
+     //   fourOrFive_digit_display(codeIterationLimit);
         putc(0x0d);      // CR (carriage return) and
         putc(0x0a);      // LF (linefeed) between pixels
     }     // End of while(TRUE)
