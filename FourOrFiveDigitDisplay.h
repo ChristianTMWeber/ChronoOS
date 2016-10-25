@@ -1,4 +1,4 @@
-int display_count;
+
 void fourOrFive_digit_display(long serialOutInteger); 
 
 // sends the argument integer to the serial port
@@ -7,6 +7,7 @@ void fourOrFive_digit_display(long serialOutInteger);
 
 void fourOrFive_digit_display(long serialOutInteger)// sends the argument integer to the serial port
 {
+    int display_count;
 //
 //Tenthousands
     if (serialOutInteger >= 10000)

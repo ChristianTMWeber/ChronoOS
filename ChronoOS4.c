@@ -310,7 +310,7 @@ codeIterationLimit = 1;
         {
             waveform_wrtsig(); // record particle incidents on the chronopixel
             wrtsig_counter++;
-/*
+
             //increment the timestamp to write to the chronopixel
             if(portc_image <255) //port c seems to be responsible for the 8 least significant bits
             { portc_image ++;}               // Increment Time Stamp Counter
@@ -320,7 +320,7 @@ codeIterationLimit = 1;
             }
            output_c(portc_image); //output the incremented timestamp to the chronopixel
            output_b(portb_image);
-*/
+
         }
 
         portc_image = 0;                 // Clear time stamp
@@ -456,6 +456,46 @@ codeIterationLimit = 1;
      //   fourOrFive_digit_display(codeIterationLimit);
         putc(0x0d);      // CR (carriage return) and
         putc(0x0a);      // LF (linefeed) between pixels
+
+
+        // Readout of coordinates and timestamps
+
+                while(wrtsig_counter <2304)         // Sixth(last) eight columns. Number of total pixels is 2304
+        {
+            waveform_drdtst();                     // Read the timestamp from the pixel
+            if(chrono_data != 0)
+            {
+//                    set_timer1(0);   
+waveform_idle4();
+//                       time = get_timer1();
+                twoDigitDisplay(portd_image); // Output the row of the hit pixel
+waveform_idle4();
+               putc(0x2C); //comma
+waveform_idle4();
+                twoDigitDisplay(porte_image); // Output the column of the hit pixel
+waveform_idle4();
+                putc(0x2C); //comma
+waveform_idle4();
+                fourOrFive_digit_display(chrono_data);
+ waveform_idle4();
+                putc(0x2C); //comma
+waveform_idle4();
+                
+                fourOrFive_digit_display(time);
+waveform_idle4();
+                putc(0x0d);      // CR (carriage return) and
+waveform_idle4();
+                putc(0x0a);      // LF (linefeed) between pixels
+waveform_idle4();
+            }
+            read_chrono();                         // Increment the rows and columns
+            
+
+            wrtsig_counter++;
+            
+        }
+
+
     }     // End of while(TRUE)
 
 }  // End of main
