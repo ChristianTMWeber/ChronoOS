@@ -190,7 +190,9 @@ void main()
     // use set_timer1(0); to set the timer to 0, get_timer1(); to get the time
 
     time = get_timer1();
-
+    set_timer1(0); // reset the timer to 0
+    time = get_timer1(); // save the timer  
+        
     run_mode = 0;                             // Clear the run mode flag
     
     set_tris_a(0b00000000);
@@ -264,7 +266,7 @@ codeIterationLimit = 1;
             waveform_calib4();
             calib4_counter++;
         }
-        set_timer1(0); // reset the timer to 0
+        
 
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
@@ -320,7 +322,7 @@ codeIterationLimit = 1;
            output_b(portb_image);
 */
         }
-        time = get_timer1(); // save the timer  
+
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
