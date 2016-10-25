@@ -109,7 +109,7 @@
 //
 //
 //
-#use delay(clock = 20000000)
+#use delay(clock = 25000000)
 
 
 //
@@ -148,6 +148,7 @@ long chrono_data_storage [600]; //never used!
 long chrono_data_storage_pointer; //never used!
 
 long time; // to store the timer in
+long codeIterationLimit;
 
 //
 // setup functions
@@ -214,10 +215,15 @@ void main()
     
 //
 //
-//
+codeIterationLimit = 1;
 //
     while(TRUE)                          // Do stuff // The long while loop in which everything happens
     {
+        if(codeIterationLimit < 1000)
+            {codeIterationLimit += 2;}
+        else
+            {codeIterationLimit = 1;}
+
         portg_image = input_g();                        // Get inputs from PortG
         sw_input = portg_image & (0b00010000);          // Sw1 from Pin G4
         if(sw_input !=0)
@@ -252,24 +258,28 @@ void main()
         waveform_calin4();
         
         // calibrate repeatedly
-        set_timer1(0); // reset the timer to 0
         calib4_counter = 0;
-        while(calib4_counter <100)
+        while(calib4_counter < 100)
         {
             waveform_calib4();
             calib4_counter++;
         }
-        time = get_timer1(); // save the timer
-        
+        set_timer1(0); // reset the timer to 0
+
         hit_imlar_zero_low();                  // Release VTH short
         hit_imlar_low();                       // VTH to 250 mV
         // reset the memory by writing the output c (and maybe b too) to the chronopixel
+        
+        
         mrst4_counter = 0;
-        while(mrst4_counter <5)
+        while(mrst4_counter <1)
         {
             waveform_mrst4();
             mrst4_counter++;
         }
+  
+
+
         hit_imlar_high();                      // Pull VTH to 30 mV
         hit_imlar_zero_high();                 // Pull VTH to 0mV
         
@@ -280,7 +290,18 @@ void main()
         portb_image = (0b00000000);            // Only first 4 LSB bits of portb go to Chronopixel(right side of image)
         output_c(portc_image);
         output_b(portb_image);
-///*
+
+        /*
+        idle4_counter = 0;
+        while(idle4_counter < codeIterationLimit)
+        {
+            waveform_idle4();
+            idle4_counter++;
+        }
+        */
+
+  
+///*    
 
         wrtsig_counter = 0;
         while(wrtsig_counter < 4095)        //Time Stamp 4095
@@ -299,14 +320,13 @@ void main()
            output_b(portb_image);
 */
         }
-
-     
+        time = get_timer1(); // save the timer  
         portc_image = 0;                 // Clear time stamp
         portb_image = 0;
         output_c(portc_image);
         output_b(portb_image);
-        
-        
+
+  
 //
 // Write to memory
 //
@@ -429,6 +449,9 @@ void main()
 // Display the timer
         putc(0x2C); //comma
         fourOrFive_digit_display(time);
+// Display the number of code iterations
+     //   putc(0x2C); //comma
+     //   fourOrFive_digit_display(codeIterationLimit);
         putc(0x0d);      // CR (carriage return) and
         putc(0x0a);      // LF (linefeed) between pixels
     }     // End of while(TRUE)
