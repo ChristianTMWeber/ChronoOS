@@ -31,12 +31,14 @@ output_low(PIN_A4);//tninlow
 delay_us(2);
 output_high(PIN_A5);//tinhigh
 delay_us(2);
-output_high(PIN_A1);//ckahighatt24
+
 delay_us(2);
+output_high(PIN_A1);//ckahighatt24
 output_low(PIN_A5);//tinlow
 output_high(PIN_A4);//tninhighatt25
-delay_us(2);
 output_low(PIN_A1);//ckalow
+delay_us(2);
+
 delay_us(2);
 output_low(PIN_A4);//tninlow
 delay_us(1);
