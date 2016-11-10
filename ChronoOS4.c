@@ -109,7 +109,7 @@
 //
 //
 //
-#use delay(clock = 25000000)
+#use delay(clock = 20000000)
 
 
 //
@@ -150,6 +150,7 @@ long chrono_data_storage_pointer; //never used!
 long time; // to store the timer in
 long codeIterationLimit;
 
+long myTemp; // to store my temperature indicator read out in 
 //
 // setup functions
 //
@@ -192,6 +193,17 @@ void main()
     time = get_timer1();
     set_timer1(0); // reset the timer to 0
     time = get_timer1(); // save the timer  
+
+    //// Set up Temperature Indicator
+
+    setup_vref( TEMPERATURE_INDICATOR_ENABLED | TEMPERATURE_RANGE_LOW);
+
+    setup_adc_ports(NO_ANALOGS); 
+    setup_adc(ADC_CLOCK_DIV_64); // divide by 64, as we run at >= 20 MHz
+
+    set_adc_channel(TEMPERATURE_INDICATOR);
+    //           myTemp = adc_done();
+    //// Did set the temperature indicator up    
         
     run_mode = 0;                             // Clear the run mode flag
     
@@ -207,7 +219,7 @@ void main()
 //
     delay_ms(500);
     
-    
+
 // set and output port c and d to 0
 // these two ports seem related to setting the timestamps on the chronopixel
     portc_image = (0b00000000);            // Set a Stamp Counter
@@ -450,7 +462,10 @@ codeIterationLimit = 1;
         fourOrFive_digit_display(column_count6);
 // Display the timer
         putc(0x2C); //comma
-        fourOrFive_digit_display(time);
+
+        myTemp = read_adc(); //read the ADC ( that is switched to the temperature indicator)
+        //time = adc_done();
+        fourOrFive_digit_display(myTemp);
 // Display the number of code iterations
      //   putc(0x2C); //comma
      //   fourOrFive_digit_display(codeIterationLimit);
