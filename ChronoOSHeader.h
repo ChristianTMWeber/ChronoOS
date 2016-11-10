@@ -10,6 +10,6 @@
 #FUSES NOWRT
 
 
-#use delay(clock=25000000)//#use delay(clock=32000000)
+#use delay(clock=20000000)//#use delay(clock=25000000)
 #use rs232(baud=115200,parity=N,xmit=PIN_G1,rcv=PIN_G2,bits=8)
 
